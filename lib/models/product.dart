@@ -23,14 +23,14 @@ class Product {
     this.quantity,
   });
 
-  factory Product.fromMap(Map<String, dynamic> map) {
+  factory Product.fromJson(Map<String, dynamic> map) {
     return Product(
       id: map['id'],
       product: map['product'],
       code: map['code'],
       name: map['name'],
       stock: map['stock'],
-      purchasePrice: map['purchase_price'],
+      purchasePrice: map['purchase_price'] ?? 0.0,
       salePrice: map['sale_price'],
       image: map['image'],
       selected: map['selected'],

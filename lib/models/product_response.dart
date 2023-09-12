@@ -11,11 +11,11 @@ class ProductResponse {
     required this.data,
   });
 
-  factory ProductResponse.fromMap(Map<String, dynamic> map) {
+  factory ProductResponse.fromJson(Map<String, dynamic> map) {
     return ProductResponse(
       success: map['Success'],
       message: map['Message'],
-      data: List<Product>.from(map['Data']?.map((x) => Product.fromMap(x))),
+      data: List<Product>.from(map['Data']?.map((x) => Product.fromJson(x))),
     );
   }
 
