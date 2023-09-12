@@ -3,11 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
+import 'package:yonesto_ui/models/user.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/ui/widgets/minimalist_text_field.dart';
 
 class SignInForm extends StatelessWidget {
-  const SignInForm({super.key});
+  SignInForm({super.key});
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +26,20 @@ class SignInForm extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const MinimalistTextField(
+          MinimalistTextField(
             lable: 'User Name',
+            controller: userNameController,
           ),
-          const MinimalistTextField(
+          MinimalistTextField(
             lable: 'Password',
             isPassword: true,
+            controller: passwordController,
           ),
           if (size.width > 700)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RememberMe(),
+                const RememberMe(),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 25.0,
@@ -51,9 +56,9 @@ class SignInForm extends StatelessWidget {
                 ),
               ],
             ),
-          if (size.width < 700) RememberMe(),
+          if (size.width < 700) const RememberMe(),
           if (size.width < 700)
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           if (size.width < 700)
@@ -96,9 +101,42 @@ class SignInForm extends StatelessWidget {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () async {
-                        await yonestoAPI.getProducts();
+                        var response = await uniaccountsAPI.signIn(User(
+                          userName: userNameController.text,
+                          password: passwordController.text,
+                        ));
+                        String message = '';
+                        if (response == 200) {
+                          message = 'Todo BIen';
+                        }
+                        if (response == 500) {
+                          message = 'No existe el usuario';
+                        }
+                        if (response == 401) {
+                          message = 'NO apy Key valid';
+                        }
+                        if (response == 400) {
+                          message = 'Faltan parametros';
+                        }
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.blue,
+                            content: Text(
+                              message,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            duration: const Duration(
+                                seconds: 2), // Duración del SnackBar
+                          ),
+                        );
+                        if (response != -1) {
+                          await yonestoAPI.getProducts();
+                          print('la respuesta es $response');
+                          context.go('/home');
+                        }
                         // Navega a la pantalla de inicio solo si la llamada fue exitosa
-                        context.go('/home');
                       },
                       child: const Text('Continue'),
                     ),
