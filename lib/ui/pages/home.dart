@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/product.dart';
 import 'package:yonesto_ui/providers/cart.dart';
-import 'package:yonesto_ui/service/fakeData.dart';
+import 'package:yonesto_ui/service/apis/api_conection.dart';
+import 'package:yonesto_ui/service/data_static.dart';
 import 'package:yonesto_ui/ui/widgets/list_of_cart.dart';
 import 'package:yonesto_ui/ui/widgets/wrap_products.dart';
 import 'package:yonesto_ui/ui/widgets/yonesto_appbar.dart';
@@ -26,8 +27,17 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  static List<Product> mainProdcuts = generateFakeProducts(11);
-  List<Product> displayProducts = List.from(mainProdcuts);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    mainProdcuts = databaseStatic.products;
+    displayProducts = List.from(mainProdcuts);
+    cartProdicts = [];
+  }
+
+  List<Product> mainProdcuts = [];
+  List<Product> displayProducts = [];
   List<Product> cartProdicts = [];
   @override
   Widget build(BuildContext context) {
