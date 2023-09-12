@@ -7,6 +7,7 @@ class User {
   String dateOfBirth;
   String password;
   String role;
+  String id;
 
   User({
     this.name = '',
@@ -17,19 +18,20 @@ class User {
     this.dateOfBirth = '',
     this.password = '',
     this.role = '',
+    this.id = '',
   });
 
   static User fromJson(Map<String, dynamic> data) {
     return User(
-      name: data['name'],
-      lastName: data['last_name'],
-      email: data['email'],
-      userName: data['user_name'],
-      phoneNumber: data['phone_number'],
-      dateOfBirth: data['date_of_birth'],
-      password: data['password'],
-      role: data['role'],
-    );
+        name: data['name'],
+        lastName: data['last_name'],
+        email: data['email'],
+        userName: data['user_name'],
+        phoneNumber: data['phone_number'],
+        dateOfBirth: data['date_of_birth'],
+        password: data['password'],
+        role: data['role'],
+        id: data['id']);
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +44,7 @@ class User {
       "date_of_birth": dateOfBirth,
       "password": password,
       "role": role,
+      "id": id,
     };
   }
 }
