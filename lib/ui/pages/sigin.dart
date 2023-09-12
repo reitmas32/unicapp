@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yonesto_ui/ui/views/signin/body.dart';
 import 'package:yonesto_ui/ui/views/signin/dont_account.dart';
 import 'package:yonesto_ui/ui/views/signin/form.dart';
-import 'package:yonesto_ui/ui/yonesto.dart';
+import 'package:yonesto_ui/ui/widgets/yonesto_appbar.dart';
 
 class SingInPage extends StatefulWidget {
   const SingInPage({super.key});
