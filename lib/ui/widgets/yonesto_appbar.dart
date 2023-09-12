@@ -26,12 +26,28 @@ class _YonestoAppBarState extends State<YonestoAppBar> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final currentTheme = Provider.of<ThemeProvider>(context);
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: widget.title,
       titleSpacing: size.width > 750 ? 200 : 0,
-      actions: const [
-        ThemeSwitcher(),
+      actions: [
+        IconButton(
+          onPressed: () {
+            if (currentTheme.isDarkTheme()) {
+              setState(() {
+                currentTheme.setTheme = ThemePreference.LIGHT;
+              });
+            } else {
+              setState(() {
+                currentTheme.setTheme = ThemePreference.DARK;
+              });
+            }
+          },
+          icon: Icon(
+            currentTheme.isDarkTheme() ? Icons.wb_sunny : EvaIcons.moon,
+          ),
+        ),
       ],
       leading: IconButton(
         icon: const Icon(Icons.home),
