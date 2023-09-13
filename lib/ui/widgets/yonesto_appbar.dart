@@ -31,28 +31,11 @@ class _YonestoAppBarState extends State<YonestoAppBar> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: widget.title,
       titleSpacing: size.width > 750 ? 200 : 0,
-      actions: [
-        IconButton(
-          onPressed: () {
-            if (currentTheme.isDarkTheme()) {
-              setState(() {
-                currentTheme.setTheme = ThemePreference.LIGHT;
-              });
-            } else {
-              setState(() {
-                currentTheme.setTheme = ThemePreference.DARK;
-              });
-            }
-          },
-          icon: Icon(
-            currentTheme.isDarkTheme() ? Icons.wb_sunny : EvaIcons.moon,
-          ),
-        ),
-      ],
       leading: IconButton(
-        icon: const Icon(Icons.home),
+        icon: const Icon(Icons.menu),
         onPressed: () {
-          context.go('/home');
+          Scaffold.of(context).openDrawer();
+          //context.go('/home');
         },
       ),
     );
@@ -74,36 +57,57 @@ class MinimalistAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _MinimalistAppBarState extends State<MinimalistAppBar> {
   @override
   Widget build(BuildContext context) {
-    final currentTheme = Provider.of<ThemeProvider>(context);
     return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       elevation: 0.5,
-      actions: [
-        IconButton(
-          onPressed: () {
-            if (currentTheme.isDarkTheme()) {
-              setState(() {
-                currentTheme.setTheme = ThemePreference.LIGHT;
-              });
-            } else {
-              setState(() {
-                currentTheme.setTheme = ThemePreference.DARK;
-              });
-            }
-          },
-          icon: Icon(
-            currentTheme.isDarkTheme() ? Icons.wb_sunny : EvaIcons.moon,
+      title: Stack(
+        children: [
+          Center(
+            child: Text(
+              'Sign In',
+              style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w200,
+                fontSize: 25,
+              ),
+            ),
           ),
-        ),
-      ],
-      title: Center(
-        child: Text(
-          'Sign In',
-          style: GoogleFonts.roboto(
-            fontWeight: FontWeight.w200,
-            fontSize: 25,
-          ),
-        ),
+          const Positioned(
+            right: -5,
+            top: -10,
+            child: ThemeButton(),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ThemeButton extends StatefulWidget {
+  const ThemeButton({super.key});
+
+  @override
+  State<ThemeButton> createState() => _ThemeButtonState();
+}
+
+class _ThemeButtonState extends State<ThemeButton> {
+  @override
+  Widget build(BuildContext context) {
+    final currentTheme = Provider.of<ThemeProvider>(context);
+
+    return IconButton(
+      onPressed: () {
+        if (currentTheme.isDarkTheme()) {
+          setState(() {
+            currentTheme.setTheme = ThemePreference.LIGHT;
+          });
+        } else {
+          setState(() {
+            currentTheme.setTheme = ThemePreference.DARK;
+          });
+        }
+      },
+      icon: Icon(
+        currentTheme.isDarkTheme() ? Icons.wb_sunny : EvaIcons.moon,
       ),
     );
   }

@@ -27,26 +27,29 @@ class ShoppingCard extends StatelessWidget {
       elevation: 15.0,
       shadowColor: Colors.purple,
       child: Container(
-        width: size.width > 750 ? 200 : 150,
-        height: 300,
-        padding: EdgeInsets.all(size.width > 750 ? 20 : 10),
+        width: size.width > 750 ? 200 : 120,
+        height: 200,
+        padding: EdgeInsets.all(size.width > 750 ? 20 : 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.network(
-              'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
-              height: 150,
+            Center(
+              child: Image.network(
+                'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
+                height: 60,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
                 product.name,
-                maxLines: 1,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
+                  //fontWeight: FontWeight.bold,
+                  fontSize: 12,
                 ),
               ),
             ),

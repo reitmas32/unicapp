@@ -22,7 +22,7 @@ class SignInForm extends StatelessWidget {
             ? size.width / 3
             : size.width > 1000
                 ? size.width / 5
-                : size.width / 8,
+                : 0,
       ),
       child: Column(
         children: [
@@ -83,7 +83,7 @@ class SignInForm extends StatelessWidget {
             borderRadius: BorderRadius.circular(17),
             child: SizedBox(
               width: 300,
-              height: 45,
+              height: 55,
               child: Stack(
                 children: <Widget>[
                   Positioned.fill(
@@ -93,7 +93,6 @@ class SignInForm extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 300,
-                    height: 45,
                     child: TextButton(
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.white,
@@ -101,11 +100,27 @@ class SignInForm extends StatelessWidget {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () async {
+                        showDialog(
+                          context: context,
+                          barrierDismissible:
+                              false, // Evita que el usuario cierre el diálogo tocando fuera de él
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Espera'),
+                              content: Text('Iniciando sesión...'),
+                              // Puedes personalizar el contenido y el estilo de tu AlertDialog aquí
+                            );
+                          },
+                        );
+
                         var response = await uniaccountsAPI.signIn(User(
                           userName: userNameController.text,
                           password: passwordController.text,
                         ));
+
+                        Navigator.pop(context);
                         String message = '';
+
                         if (response == 200) {
                           message = 'Todo BIen';
                         }
@@ -118,6 +133,7 @@ class SignInForm extends StatelessWidget {
                         if (response == 400) {
                           message = 'Faltan parametros';
                         }
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: Colors.blue,
@@ -127,16 +143,14 @@ class SignInForm extends StatelessWidget {
                                 color: Colors.white,
                               ),
                             ),
-                            duration: const Duration(
-                                seconds: 2), // Duración del SnackBar
+                            duration: const Duration(seconds: 2),
                           ),
                         );
-                        if (response != -1) {
+                        print(response);
+                        if (response == 200) {
                           await yonestoAPI.getProducts();
-                          print('la respuesta es $response');
                           context.go('/home');
                         }
-                        // Navega a la pantalla de inicio solo si la llamada fue exitosa
                       },
                       child: const Text('Continue'),
                     ),
@@ -144,6 +158,9 @@ class SignInForm extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          const SizedBox(
+            height: 15,
           ),
         ],
       ),

@@ -21,13 +21,15 @@ class _SingInPageState extends State<SingInPage> {
     return Scaffold(
       appBar: const MinimalistAppBar(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const SignInBody(),
-            SignInForm(),
-            const SignInDontAccount(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const SignInBody(),
+              SignInForm(),
+              const SignInDontAccount(),
+            ],
+          ),
         ),
       ),
     );

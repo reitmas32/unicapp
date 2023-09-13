@@ -9,27 +9,26 @@ class WrapProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 4,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Wrap(
-                spacing: 20, // Espacio horizontal entre contenedores
-                runSpacing: 20,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Wrap(
+              spacing: 0, // Espacio horizontal entre contenedores
+              runSpacing: 0,
 
-                children: List.generate(
-                  displayProducts.length,
-                  (index) {
-                    return ShoppingCard(
+              children: List.generate(
+                displayProducts.length,
+                (index) {
+                  return Container(
+                    child: ShoppingCard(
                       index: index,
                       product: displayProducts[index],
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             ),
           ),

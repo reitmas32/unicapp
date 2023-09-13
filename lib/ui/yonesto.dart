@@ -35,7 +35,7 @@ class _YonestoState extends State<Yonesto> {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => const SingInPage(),
+        builder: (context, state) => const HomePage(),
       ),
       GoRoute(
         path: "/home",

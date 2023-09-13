@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           : null,
+      drawer: Drawer(),
       appBar: YonestoAppBar(
         title: Padding(
           padding: const EdgeInsets.all(25.0),
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                 borderSide: BorderSide.none,
               ),
               hintText: "eg: CocaCola",
-              prefixIcon: const Icon(
+              suffixIcon: const Icon(
                 Icons.search,
                 color: Colors.purple,
               ),
@@ -81,18 +82,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Row(
-        children: [
-          WrapProducts(
-            displayProducts: displayProducts,
-          ),
-          size.width > 750
-              ? ListOfCart(
+      body: size.width > 750
+          ? Row(
+              children: [
+                WrapProducts(
+                  displayProducts: displayProducts,
+                ),
+                ListOfCart(
                   displayProducts: cart.getCart(),
                 )
-              : Container(),
-        ],
-      ),
+              ],
+            )
+          : WrapProducts(
+              displayProducts: displayProducts,
+            ),
     );
   }
 }
