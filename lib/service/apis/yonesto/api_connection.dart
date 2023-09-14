@@ -6,9 +6,7 @@ import 'package:yonesto_ui/service/apis/yonesto/base.dart';
 import 'package:yonesto_ui/service/data_static.dart'; // Asegúrate de importar tus modelos aquí
 
 class YonestoAPI {
-  final http.Client httpClient;
-
-  YonestoAPI(this.httpClient);
+  YonestoAPI();
   Future<bool> getProducts() async {
     var response = await http.get(Uri.parse('${YonestoBase.url}/product/info'));
     if (response.statusCode == 200) {
@@ -31,25 +29,6 @@ class YonestoAPI {
     return Future(() => false);
   }
 
-/*
-  Future<dynamic> getUsers() async {
-    final response = await http.get(Uri.parse('$apiUrl/users'));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Failed to fetch users');
-    }
-  }
-
-  Future<dynamic> getPurchases() async {
-    final response = await http.get(Uri.parse('$apiUrl/purchases'));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Failed to fetch purchases');
-    }
-  }
-*/
   Future<dynamic> createBuy(BuyRequest buyRequest) async {
     final response = await http.post(
       Uri.parse('${YonestoBase.url}/buy/create/'),
