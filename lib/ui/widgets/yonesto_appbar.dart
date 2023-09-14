@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/buttons/theme_swtcher.dart';
 import 'package:unihacks_ui_kit/themes/theme_preference.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
+import 'package:yonesto_ui/ui/widgets/theme_button.dart';
 
 class YonestoAppBar extends StatefulWidget implements PreferredSizeWidget {
   const YonestoAppBar({
@@ -77,37 +78,6 @@ class _MinimalistAppBarState extends State<MinimalistAppBar> {
             child: ThemeButton(),
           )
         ],
-      ),
-    );
-  }
-}
-
-class ThemeButton extends StatefulWidget {
-  const ThemeButton({super.key});
-
-  @override
-  State<ThemeButton> createState() => _ThemeButtonState();
-}
-
-class _ThemeButtonState extends State<ThemeButton> {
-  @override
-  Widget build(BuildContext context) {
-    final currentTheme = Provider.of<ThemeProvider>(context);
-
-    return IconButton(
-      onPressed: () {
-        if (currentTheme.isDarkTheme()) {
-          setState(() {
-            currentTheme.setTheme = ThemePreference.LIGHT;
-          });
-        } else {
-          setState(() {
-            currentTheme.setTheme = ThemePreference.DARK;
-          });
-        }
-      },
-      icon: Icon(
-        currentTheme.isDarkTheme() ? Icons.wb_sunny : EvaIcons.moon,
       ),
     );
   }
