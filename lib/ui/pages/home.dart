@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:yonesto_ui/ui/widgets/awesom_button.dart';
+import 'package:yonesto_ui/ui/widgets/theme_button.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/product.dart';
 import 'package:yonesto_ui/providers/cart.dart';
@@ -20,7 +23,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   void updateProducts(String value) {
     setState(() {
-      displayProducts = mainProdcuts
+      displayProducts = mainProdcuts!
           .where((element) =>
               element.name.toLowerCase().contains(value.toLowerCase()))
           .toList();
@@ -29,21 +32,31 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    mainProdcuts = databaseStatic.products;
-    displayProducts = List.from(mainProdcuts);
+    mainProdcuts = [];
+    displayProducts = List.from(mainProdcuts ?? []);
     cartProdicts = [];
+    getProducts();
   }
 
-  List<Product> mainProdcuts = [];
+  bool dataIsReady = false;
+
+  Future<void> getProducts() async {
+    final response = await yonestoAPI.getProducts();
+    if (response) {
+      setState(() {
+        mainProdcuts = databaseStatic.products;
+        displayProducts = mainProdcuts ?? [];
+        dataIsReady = true;
+      });
+    }
+  }
+
+  List<Product>? mainProdcuts;
   List<Product> displayProducts = [];
   List<Product> cartProdicts = [];
   @override
   Widget build(BuildContext context) {
-    final currentColor = Provider.of<ThemeProvider>(context);
-    final cart = Provider.of<CartProvider>(context);
-
     final size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: size.width < 750
@@ -58,44 +71,132 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           : null,
-      drawer: Drawer(),
+      drawer: const YonestoDrawer(),
       appBar: YonestoAppBar(
-        title: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: TextField(
-            onChanged: (value) => updateProducts(value),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: currentColor.isDarkTheme()
-                  ? const Color.fromARGB(255, 35, 34, 34)
-                  : const Color.fromARGB(255, 199, 197, 197),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide.none,
-              ),
-              hintText: "eg: CocaCola",
-              suffixIcon: const Icon(
-                Icons.search,
-                color: Colors.purple,
-              ),
-            ),
-          ),
+        title: SearchBar(
+          onChanged: updateProducts,
         ),
       ),
-      body: size.width > 750
-          ? Row(
-              children: [
-                WrapProducts(
-                  displayProducts: displayProducts,
-                ),
-                ListOfCart(
-                  displayProducts: cart.getCart(),
-                )
-              ],
+      body: !dataIsReady
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: Colors.purple,
+              ),
             )
-          : WrapProducts(
+          : ContentShop(
               displayProducts: displayProducts,
             ),
     );
+  }
+}
+
+class YonestoDrawer extends StatelessWidget {
+  const YonestoDrawer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final currentTheme = Provider.of<ThemeProvider>(context);
+    return Drawer(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 50,
+            ),
+            child: Text(
+              'UNICapp',
+              style: GoogleFonts.righteous(
+                fontSize: 35,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0),
+            child: AwesomButton(
+              lable: 'Pay debts',
+              onTap: () {},
+            ),
+          ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const ThemeButton(),
+              AwesomButton(
+                lable: 'Sign Out',
+                onTap: () {},
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({super.key, this.onChanged});
+
+  final void Function(String)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final currentColor = Provider.of<ThemeProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(25.0),
+      child: TextField(
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: currentColor.isDarkTheme()
+              ? const Color.fromARGB(255, 35, 34, 34)
+              : const Color.fromARGB(255, 199, 197, 197),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide.none,
+          ),
+          hintText: "eg: CocaCola",
+          suffixIcon: const Icon(
+            Icons.search,
+            color: Colors.purple,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ContentShop extends StatelessWidget {
+  const ContentShop({super.key, required this.displayProducts});
+
+  final List<Product> displayProducts;
+
+  @override
+  Widget build(BuildContext context) {
+    final cart = Provider.of<CartProvider>(context);
+
+    final size = MediaQuery.of(context).size;
+    return size.width > 750
+        ? Row(
+            children: [
+              WrapProducts(
+                displayProducts: displayProducts,
+              ),
+              ListOfCart(
+                displayProducts: cart.getCart(),
+              )
+            ],
+          )
+        : WrapProducts(
+            displayProducts: displayProducts,
+          );
   }
 }
