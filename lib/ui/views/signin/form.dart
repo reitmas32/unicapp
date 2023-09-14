@@ -5,12 +5,22 @@ import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/user.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
+import 'package:yonesto_ui/ui/widgets/awesom_button.dart';
 import 'package:yonesto_ui/ui/widgets/minimalist_text_field.dart';
 
-class SignInForm extends StatelessWidget {
-  SignInForm({super.key});
+class SignInForm extends StatefulWidget {
+  const SignInForm({super.key});
+
+  @override
+  State<SignInForm> createState() => _SignInFormState();
+}
+
+class _SignInFormState extends State<SignInForm> {
   TextEditingController userNameController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
+  TextEditingController userCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +44,10 @@ class SignInForm extends StatelessWidget {
             lable: 'Password',
             isPassword: true,
             controller: passwordController,
+          ),
+          MinimalistTextField(
+            lable: 'User Code',
+            controller: userCodeController,
           ),
           if (size.width > 700)
             Row(
@@ -79,84 +93,13 @@ class SignInForm extends StatelessWidget {
           const SizedBox(
             height: 100,
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(17),
-            child: SizedBox(
-              width: 300,
-              height: 55,
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: Container(
-                      color: Colors.purple,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 300,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.all(16.0),
-                        textStyle: const TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () async {
-                        showDialog(
-                          context: context,
-                          barrierDismissible:
-                              false, // Evita que el usuario cierre el diálogo tocando fuera de él
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Espera'),
-                              content: Text('Iniciando sesión...'),
-                              // Puedes personalizar el contenido y el estilo de tu AlertDialog aquí
-                            );
-                          },
-                        );
-
-                        var response = await uniaccountsAPI.signIn(User(
-                          userName: userNameController.text,
-                          password: passwordController.text,
-                        ));
-
-                        Navigator.pop(context);
-                        String message = '';
-
-                        if (response == 200) {
-                          message = 'Todo BIen';
-                        }
-                        if (response == 500) {
-                          message = 'No existe el usuario';
-                        }
-                        if (response == 401) {
-                          message = 'NO apy Key valid';
-                        }
-                        if (response == 400) {
-                          message = 'Faltan parametros';
-                        }
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: Colors.blue,
-                            content: Text(
-                              message,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            duration: const Duration(seconds: 2),
-                          ),
-                        );
-                        print(response);
-                        if (response == 200) {
-                          await yonestoAPI.getProducts();
-                          context.go('/home');
-                        }
-                      },
-                      child: const Text('Continue'),
-                    ),
-                  ),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 100,
+            ),
+            child: AwesomButton(
+              lable: 'Sign Out',
+              onTap: singIn,
             ),
           ),
           const SizedBox(
@@ -165,6 +108,60 @@ class SignInForm extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  singIn() async {
+    showDialog(
+      context: context,
+      barrierDismissible:
+          false, // Evita que el usuario cierre el diálogo tocando fuera de él
+      builder: (BuildContext context) {
+        return const AlertDialog(
+          title: Text('Espera'),
+          content: Text('Iniciando sesión...'),
+          // Puedes personalizar el contenido y el estilo de tu AlertDialog aquí
+        );
+      },
+    );
+
+    var response = await uniaccountsAPI.signIn(User(
+      userName: userNameController.text,
+      password: passwordController.text,
+    ));
+
+    Navigator.pop(context);
+    String message = '';
+
+    if (response == 200) {
+      message = 'Todo BIen';
+    }
+    if (response == 500) {
+      message = 'No existe el usuario';
+    }
+    if (response == 401) {
+      message = 'NO apy Key valid';
+    }
+    if (response == 400) {
+      message = 'Faltan parametros';
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.blue,
+        content: Text(
+          message,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+    print(response);
+    if (response == 200) {
+      //await yonestoAPI.getProducts();
+      context.go('/home');
+    }
   }
 }
 
