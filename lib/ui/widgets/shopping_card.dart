@@ -21,10 +21,12 @@ class ShoppingCard extends StatelessWidget {
     final currentColor = Provider.of<ThemeProvider>(context);
     final size = MediaQuery.of(context).size;
     return Card(
-      color: currentColor.isDarkTheme()
-          ? const Color.fromARGB(255, 35, 34, 34)
-          : const Color.fromARGB(255, 199, 197, 197),
-      elevation: 15.0,
+      color: product.stock == 0
+          ? Color.fromARGB(53, 228, 44, 31)
+          : currentColor.isDarkTheme()
+              ? const Color.fromARGB(255, 35, 34, 34)
+              : const Color.fromARGB(255, 199, 197, 197),
+      elevation: product.stock == 0 ? 0 : 15.0,
       shadowColor: Colors.purple,
       child: Container(
         width: size.width > 750 ? 200 : 120,
@@ -36,7 +38,7 @@ class ShoppingCard extends StatelessWidget {
           children: [
             Center(
               child: Image.network(
-                'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
+                product.image,
                 height: 60,
               ),
             ),
@@ -70,9 +72,11 @@ class ShoppingCard extends StatelessWidget {
                 const Spacer(),
                 RemoveToCartButton(
                   product: product,
+                  avalible: product.stock != 0,
                 ),
                 AddToCartButton(
                   product: product,
+                  avalible: product.stock != 0,
                 ),
               ],
             )
