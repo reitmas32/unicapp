@@ -18,16 +18,16 @@ class _SingInPageState extends State<SingInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const MinimalistAppBar(),
+    return const Scaffold(
+      appBar: MinimalistAppBar(),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const SignInBody(),
+              SignInBody(),
               SignInForm(),
-              const SignInDontAccount(),
+              SignInDontAccount(),
             ],
           ),
         ),
