@@ -1,18 +1,18 @@
 import 'package:yonesto_ui/models/product.dart';
 
-class ProductResponse {
+class ProductsResponse {
   bool success;
   String? message;
   List<Product> data;
 
-  ProductResponse({
+  ProductsResponse({
     required this.success,
     this.message,
     required this.data,
   });
 
-  factory ProductResponse.fromJson(Map<String, dynamic> map) {
-    return ProductResponse(
+  factory ProductsResponse.fromJson(Map<String, dynamic> map) {
+    return ProductsResponse(
       success: map['Success'],
       message: map['Message'],
       data: List<Product>.from(map['Data']?.map((x) => Product.fromJson(x))),
@@ -29,6 +29,6 @@ class ProductResponse {
 
   @override
   String toString() {
-    return 'ProductResponse(success: $success, message: $message, data: $data)';
+    return 'ProductsResponse(success: $success, message: $message, data: $data)';
   }
 }
