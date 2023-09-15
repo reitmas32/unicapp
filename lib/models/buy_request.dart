@@ -1,3 +1,5 @@
+import 'package:yonesto_ui/models/product_request.dart';
+
 class BuyRequest {
   dynamic clientCode;
   double payment;
@@ -28,35 +30,6 @@ class BuyRequest {
       payment: map['payment'],
       products: List<ProductRequest>.from(
           map['products']?.map((x) => ProductRequest.fromMap(x))),
-    );
-  }
-}
-
-class ProductRequest {
-  String? product;
-  int? quantity;
-
-  ProductRequest({
-    this.product,
-    this.quantity,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'product': product,
-      'quantity': quantity,
-    };
-  }
-
-  @override
-  String toString() {
-    return 'ProductRequest(product: $product, quantity: $quantity)';
-  }
-
-  factory ProductRequest.fromMap(Map<String, dynamic> map) {
-    return ProductRequest(
-      product: map['product'],
-      quantity: map['quantity'],
     );
   }
 }
