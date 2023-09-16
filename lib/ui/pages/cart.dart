@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/product.dart';
@@ -53,27 +54,14 @@ class _CartPageState extends State<CartPage> {
     }
 
     return Scaffold(
-      appBar: YonestoAppBar(
-        title: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: TextField(
-            onChanged: (value) => updateProducts(value),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: currentColor.isDarkTheme()
-                  ? const Color.fromARGB(255, 35, 34, 34)
-                  : const Color.fromARGB(255, 199, 197, 197),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide.none,
-              ),
-              hintText: "eg: CocaCola",
-              prefixIcon: const Icon(
-                Icons.search,
-                color: Colors.purple,
-              ),
-            ),
+      appBar: MinimalistAppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
           ),
+          onPressed: () {
+            context.go('/home');
+          },
         ),
       ),
       body: Column(
