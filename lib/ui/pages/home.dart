@@ -97,7 +97,6 @@ class YonestoDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = Provider.of<ThemeProvider>(context);
     return Drawer(
       child: Column(
         children: [
@@ -129,7 +128,12 @@ class YonestoDrawer extends StatelessWidget {
               const ThemeButton(),
               AwesomButton(
                 lable: 'Sign Out',
-                onTap: () {},
+                onTap: () async {
+                  if (await StorageConection.cleanJWT()) {
+                    // ignore: use_build_context_synchronously
+                    context.go('/');
+                  }
+                },
               )
             ],
           ),

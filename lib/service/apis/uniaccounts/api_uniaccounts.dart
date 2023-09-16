@@ -41,11 +41,8 @@ class AccountAPI {
         final bool success = signInResponse.success;
         if (success) {
           databaseStatic.jwt = responseData['Data']['token_jwt'];
-          await DataBaseStatic.storage.write(
-            key: 'jwt',
-            value: databaseStatic.jwt,
-          );
           databaseStatic.userName = user.userName;
+          StorageConection.writeJWT(databaseStatic.jwt);
         }
       }
 
