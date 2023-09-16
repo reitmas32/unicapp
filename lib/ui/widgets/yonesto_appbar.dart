@@ -46,7 +46,10 @@ class _YonestoAppBarState extends State<YonestoAppBar> {
 class MinimalistAppBar extends StatefulWidget implements PreferredSizeWidget {
   const MinimalistAppBar({
     super.key,
+    this.leading,
   });
+
+  final Widget? leading;
 
   @override
   State<MinimalistAppBar> createState() => _MinimalistAppBarState();
@@ -61,6 +64,7 @@ class _MinimalistAppBarState extends State<MinimalistAppBar> {
     return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       elevation: 0.5,
+      leading: widget.leading,
       title: Stack(
         children: [
           Center(
