@@ -3,13 +3,21 @@ import 'package:yonesto_ui/models/product.dart';
 
 class CartProvider with ChangeNotifier {
   List<Product> cart = [];
+  List<Product> shop = [];
+  List<Product> display = [];
+  int quanty = 0;
 
   addToCart(Product product) {
-    int productIndex = cart.indexWhere((item) => item.id == product.id);
+    int productCartIndex = cart.indexWhere((item) => item.id == product.id);
+    int productShopIndex = shop.indexWhere((item) => item.id == product.id);
+    if (productShopIndex == -1) {
+      notifyListeners();
+      return;
+    }
 
-    if (productIndex != -1) {
+    if (productCartIndex != -1) {
       // El producto ya está en el carrito, aumenta la cantidad en stock
-      cart[productIndex].stock++;
+      cart[productCartIndex].stock++;
     } else {
       // Agrega el producto al carrito si no estaba en él
       cart.add(Product(
@@ -25,13 +33,19 @@ class CartProvider with ChangeNotifier {
         selected: product.selected,
       ));
     }
+    shop[productShopIndex].stock--;
+    quanty++;
 
     notifyListeners();
   }
 
   removeToCart(Product product) {
     int productIndex = cart.indexWhere((item) => item.id == product.id);
-
+    int productShopIndex = shop.indexWhere((item) => item.id == product.id);
+    if (productShopIndex == -1) {
+      notifyListeners();
+      return;
+    }
     if (productIndex != -1) {
       // El producto ya está en el carrito, aumenta la cantidad en stock
       if (cart[productIndex].stock > 1) {
@@ -39,13 +53,33 @@ class CartProvider with ChangeNotifier {
       } else {
         cart.removeWhere((element) => element.id == product.id);
       }
+      quanty--;
+      shop[productShopIndex].stock++;
     }
+    notifyListeners();
+  }
+
+  updateDisplay(String value) {
+    display = shop
+        .where((element) =>
+            element.name.toLowerCase().contains(value.toLowerCase()))
+        .toList();
 
     notifyListeners();
   }
 
+  loadShop(List<Product> products) {
+    shop = products;
+    display = shop;
+  }
+
   deleteToCart(Product product) {
     cart.removeWhere((element) => element.id == product.id);
+    quanty -= product.stock;
+    int productShopIndex = shop.indexWhere((item) => item.id == product.id);
+    if (productShopIndex != -1) {
+      shop[productShopIndex].stock += product.stock;
+    }
 
     notifyListeners();
   }
