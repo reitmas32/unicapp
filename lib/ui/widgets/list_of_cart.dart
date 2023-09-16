@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/product.dart';
@@ -182,14 +183,6 @@ class _CompletePurchaseDialogState extends State<CompletePurchaseDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           MultipleTextField(
-            lable: 'ID Usuario',
-            padding: const EdgeInsets.symmetric(
-              vertical: 15.0,
-            ),
-            autofocus: true,
-            textEditingController: idUserController,
-          ),
-          MultipleTextField(
             lable: 'Cunato Pagaras',
             padding: const EdgeInsets.symmetric(
               vertical: 15.0,
@@ -224,7 +217,7 @@ class _CompletePurchaseDialogState extends State<CompletePurchaseDialog> {
                       : const Color.fromARGB(255, 35, 34, 34),
                 ),
               ),
-              duration: const Duration(milliseconds: 750),
+              duration: const Duration(milliseconds: 1500),
               backgroundColor: currentColor.isDarkTheme()
                   ? const Color.fromARGB(255, 35, 34, 34)
                   : const Color.fromARGB(
@@ -232,6 +225,7 @@ class _CompletePurchaseDialogState extends State<CompletePurchaseDialog> {
             );
 
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            context.go('/home');
           },
           lable: 'Finalizar',
           color: Colors.purple,
