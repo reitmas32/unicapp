@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/providers/cart.dart';
+import 'package:yonesto_ui/service/data_static.dart';
 import 'package:yonesto_ui/ui/yonesto.dart';
 
 class YonestoApp extends StatefulWidget {
