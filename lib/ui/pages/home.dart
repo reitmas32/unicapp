@@ -21,60 +21,83 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void updateProducts(String value) {
-    setState(() {
-      displayProducts = mainProdcuts!
-          .where((element) =>
-              element.name.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    mainProdcuts = [];
-    displayProducts = List.from(mainProdcuts ?? []);
-    cartProdicts = [];
     getProducts();
   }
 
   bool dataIsReady = false;
 
   Future<void> getProducts() async {
-    final response = await yonestoAPI.getProducts();
-    if (response) {
-      setState(() {
-        mainProdcuts = databaseStatic.products;
-        displayProducts = mainProdcuts ?? [];
-        dataIsReady = true;
-      });
+    if (databaseStatic.products.isEmpty) {
+      await yonestoAPI.getProducts();
     }
+    //if (response) {
+    setState(() {
+      dataIsReady = true;
+    });
+    //}
   }
 
-  List<Product>? mainProdcuts;
-  List<Product> displayProducts = [];
-  List<Product> cartProdicts = [];
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final cart = Provider.of<CartProvider>(context);
+    if (cart.shop.isEmpty) {
+      cart.loadShop(databaseStatic.products);
+    }
     return Scaffold(
       floatingActionButton: size.width < 750
-          ? FloatingActionButton(
-              onPressed: () {
-                context.go('/cart');
-              },
-              backgroundColor: Colors.purple,
-              child: const Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-              ),
+          ? Stack(
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    context.go('/cart');
+                  },
+                  backgroundColor: Colors.purple,
+                  child: const Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                  ),
+                ),
+                if (cart.quanty != 0)
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: AnimatedSwitcher(
+                        duration: const Duration(
+                            milliseconds: 500), // Duración de la animación
+                        transitionBuilder: (child, animation) {
+                          return ScaleTransition(
+                            scale: animation,
+                            child: child,
+                          );
+                        },
+                        child: Text(
+                          cart.quanty.toString(),
+                          key: ValueKey<int>(cart
+                              .quanty), // Identificar el widget para la animación
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             )
           : null,
       drawer: const YonestoDrawer(),
       appBar: YonestoAppBar(
         title: SearchBar(
-          onChanged: updateProducts,
+          onChanged: cart.updateDisplay,
         ),
       ),
       body: !dataIsReady
@@ -84,7 +107,7 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           : ContentShop(
-              displayProducts: displayProducts,
+              displayProducts: cart.display,
             ),
     );
   }
