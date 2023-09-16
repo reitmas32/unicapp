@@ -1,11 +1,5 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:unihacks_ui_kit/buttons/theme_swtcher.dart';
-import 'package:unihacks_ui_kit/themes/theme_preference.dart';
-import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/ui/widgets/theme_button.dart';
 
 class YonestoAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -27,7 +21,6 @@ class _YonestoAppBarState extends State<YonestoAppBar> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final currentTheme = Provider.of<ThemeProvider>(context);
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: widget.title,
