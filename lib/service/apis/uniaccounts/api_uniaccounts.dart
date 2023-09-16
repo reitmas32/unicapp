@@ -4,38 +4,47 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:yonesto_ui/models/signin_response.dart';
 import 'package:yonesto_ui/models/user.dart';
 import 'package:yonesto_ui/service/apis/uniaccounts/base.dart';
 import 'package:yonesto_ui/service/data_static.dart';
 
 class AccountAPI {
+  final Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Api-Key': dotenv.env['API_KEY'] ?? '',
+    'Service': dotenv.env['SERVICE_NAME'] ?? '',
+  };
+
   Future<bool> signUp(User user) async {
     return Future(() => false);
   }
 
   Future<int> signIn(User user) async {
     try {
-      final Map<String, String> headers = {
-        'Content-Type': 'application/json',
-        'Api-Key': dotenv.env['API_KEY'] ?? '',
-        'Service': dotenv.env['SERVICE_NAME'] ?? '',
-      };
-      final String body = jsonEncode({
+      final String bodyRequestSignIn = jsonEncode({
         "user_name": user.userName,
         "password": user.password,
       });
       final http.Response response = await http.put(
         Uri.parse('${UniaccountsBase.url}/signin'),
         headers: headers,
-        body: body,
+        body: bodyRequestSignIn,
       );
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
 
-        final bool success = responseData['Success'];
+        final SignInResponse signInResponse =
+            SignInResponse.fromJson(responseData);
+
+        final bool success = signInResponse.success;
         if (success) {
           databaseStatic.jwt = responseData['Data']['token_jwt'];
+          await DataBaseStatic.storage.write(
+            key: 'jwt',
+            value: databaseStatic.jwt,
+          );
           databaseStatic.userName = user.userName;
         }
       }
