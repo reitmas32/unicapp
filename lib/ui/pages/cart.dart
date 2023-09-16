@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/product.dart';
 import 'package:yonesto_ui/providers/cart.dart';
 import 'package:yonesto_ui/ui/widgets/list_of_cart.dart';
@@ -45,7 +44,6 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    final currentColor = Provider.of<ThemeProvider>(context);
     final cart = Provider.of<CartProvider>(context);
     cartProducts = cart.getCart();
     if (!firstShow || !compareLists(cart.getCart(), displayProducts)) {
