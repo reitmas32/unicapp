@@ -8,6 +8,7 @@ import 'package:yonesto_ui/models/product.dart';
 import 'package:yonesto_ui/providers/cart.dart';
 import 'package:unihacks_ui_kit/buttons/action_button.dart';
 import 'package:unihacks_ui_kit/text_fields/multiple_textfields.dart';
+import 'package:yonesto_ui/service/data_static.dart';
 
 class ListOfCart extends StatelessWidget {
   const ListOfCart({
@@ -93,7 +94,7 @@ class CardProductCart extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.network(
-                  'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
+                  product.image,
                   height: 150,
                 ),
               ),
@@ -225,6 +226,8 @@ class _CompletePurchaseDialogState extends State<CompletePurchaseDialog> {
             );
 
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            databaseStatic.products.clear();
+            cart.quanty = 0;
             context.go('/home');
           },
           lable: 'Finalizar',
