@@ -1,26 +1,30 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:yonesto_ui/models/buy_request.dart';
-import 'package:yonesto_ui/models/product.dart';
+import 'package:yonesto_ui/models/product_response.dart';
 import 'package:yonesto_ui/service/apis/yonesto/base.dart';
 import 'package:yonesto_ui/service/data_static.dart'; // Asegúrate de importar tus modelos aquí
 
 class YonestoAPI {
   YonestoAPI();
   Future<bool> getProducts() async {
-    var response = await http.get(Uri.parse('${YonestoBase.url}/product/info'));
+    // Make Request
+    var uri = Uri.parse('${YonestoBase.url}/product/info');
+    var response = await http.get(uri);
+
+    // Check Status Code
     if (response.statusCode == 200) {
       // La petición fue exitosa, extraer los datos del cuerpo de la respuesta
-      var responseData = jsonDecode(response.body);
+      Map<String, dynamic> responseData = jsonDecode(response.body);
 
       // Acceder a los datos específicos dentro del objeto responseData
-      var success = responseData['Success'];
+      var productsResponse = ProductsResponse.fromJson(responseData);
+      var success = productsResponse.success;
 
+      // Load Data
       if (success) {
         databaseStatic.products.clear();
-        for (var computerLab in responseData['Data']) {
-          databaseStatic.products.add(Product.fromJson(computerLab));
-        }
+        databaseStatic.products = productsResponse.data;
       }
 
       return Future(() => success);
