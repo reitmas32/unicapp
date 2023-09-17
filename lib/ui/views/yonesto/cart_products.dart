@@ -56,7 +56,7 @@ class CartProducts extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return CompletePurchaseDialog();
+                      return const CompletePurchaseDialog();
                     });
               },
               style: ElevatedButton.styleFrom(
