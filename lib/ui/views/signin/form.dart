@@ -123,6 +123,7 @@ class _SignInFormState extends State<SignInForm> {
       password: passwordController.text,
     ));
 
+    // ignore: use_build_context_synchronously
     Navigator.pop(context);
     String message = '';
 
@@ -139,6 +140,7 @@ class _SignInFormState extends State<SignInForm> {
       message = 'Faltan parametros';
     }
 
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.blue,
@@ -151,9 +153,8 @@ class _SignInFormState extends State<SignInForm> {
         duration: const Duration(seconds: 2),
       ),
     );
-    print(response);
     if (response == 200) {
-      //await yonestoAPI.getProducts();
+      // ignore: use_build_context_synchronously
       context.go('/home');
     }
   }
