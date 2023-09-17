@@ -5,14 +5,17 @@ import 'package:icon_animated/icon_animated.dart';
 class ProccessRequest extends StatelessWidget {
   const ProccessRequest({
     super.key,
+    required this.lable,
   });
+
+  final String lable;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        FourCirclePulse(
+        const FourCirclePulse(
           circleColor: Colors.purple, //The color of the circles
           dimension: 100, // The size of the widget.
           turns: 3, //Turns in each loop
@@ -21,7 +24,7 @@ class ProccessRequest extends StatelessWidget {
           ), // Duration of each loop
           curve: Curves.linear, //Curve of the animation
         ),
-        Text('Procesando Compra'),
+        Text(lable),
       ],
     );
   }
@@ -30,20 +33,23 @@ class ProccessRequest extends StatelessWidget {
 class SuccessRequest extends StatelessWidget {
   const SuccessRequest({
     super.key,
+    required this.lable,
   });
+
+  final String lable;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconAnimated(
+        const IconAnimated(
           color: Colors.green,
           active: true, // boolean
           size: 100,
           iconType: IconType.check,
         ),
-        Text('Disfruta tu compra'),
+        Text(lable),
       ],
     );
   }
@@ -52,20 +58,23 @@ class SuccessRequest extends StatelessWidget {
 class ErrorRequest extends StatelessWidget {
   const ErrorRequest({
     super.key,
+    this.lable,
   });
+
+  final lable;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconAnimated(
+        const IconAnimated(
           color: Colors.red,
           active: true, // boolean
           size: 100,
           iconType: IconType.fail,
         ),
-        Text('Hubo un Error en tu compra'),
+        Text(lable),
       ],
     );
   }
@@ -79,6 +88,9 @@ class AlertDialogRequest extends StatelessWidget {
     this.responseSuccess = false,
     this.detachProccess = false,
     this.actions,
+    required this.lable,
+    required this.successLable,
+    required this.errorLable,
   });
 
   final Widget child;
@@ -86,6 +98,9 @@ class AlertDialogRequest extends StatelessWidget {
   final bool responseSuccess;
   final bool initProccess;
   final bool detachProccess;
+  final String lable;
+  final String successLable;
+  final String errorLable;
 
   final List<Widget>? actions;
 
@@ -96,10 +111,14 @@ class AlertDialogRequest extends StatelessWidget {
           ? child
           : Container(
               child: !detachProccess
-                  ? const ProccessRequest()
+                  ? ProccessRequest(
+                      lable: lable,
+                    )
                   : responseSuccess
-                      ? const SuccessRequest()
-                      : const ErrorRequest(),
+                      ? SuccessRequest(
+                          lable: successLable,
+                        )
+                      : ErrorRequest(lable: errorLable),
             ),
       actions: actions,
     );

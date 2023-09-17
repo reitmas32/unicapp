@@ -65,6 +65,9 @@ class _CompletePurchaseDialogState extends State<CompletePurchaseDialog> {
       responseSuccess: responseSuccess,
       initProccess: initProccessBuy,
       detachProccess: detachProccessBuy,
+      lable: 'Procesando Compra',
+      successLable: 'Disfruta tu compra',
+      errorLable: 'Error al generar tu Compra',
       actions: <Widget>[
         if (!initProccessBuy)
           ActionButton(
