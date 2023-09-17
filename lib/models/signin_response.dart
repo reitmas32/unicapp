@@ -14,7 +14,7 @@ class SignInResponse {
   factory SignInResponse.fromJson(Map<String, dynamic> map) {
     final success = map['Success'] as bool;
     final message = map['Message'] as String;
-    final jwt = map['Data']?['jwt'] as String;
+    final jwt = map['Data']?['token_jwt'] as String;
 
     return SignInResponse(
       success: success,
