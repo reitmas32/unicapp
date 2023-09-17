@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class AwesomButton extends StatefulWidget {
-  const AwesomButton({super.key, required this.lable, this.onTap});
+class SimpleButton extends StatefulWidget {
+  const SimpleButton({super.key, required this.lable, this.onTap});
   final String lable;
   final VoidCallback? onTap;
 
   @override
-  State<AwesomButton> createState() => _AwesomButtonState();
+  State<SimpleButton> createState() => _SimpleButtonState();
 }
 
-class _AwesomButtonState extends State<AwesomButton> {
+class _SimpleButtonState extends State<SimpleButton> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
