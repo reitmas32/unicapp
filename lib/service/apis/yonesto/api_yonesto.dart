@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:yonesto_ui/models/buy_request.dart';
 import 'package:yonesto_ui/models/product_response.dart';
@@ -6,6 +8,10 @@ import 'package:yonesto_ui/service/apis/yonesto/base.dart';
 import 'package:yonesto_ui/service/data_static.dart'; // Asegúrate de importar tus modelos aquí
 
 class YonestoAPI {
+  final Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Token ${dotenv.env['YONESTO_API_KEY']}',
+  };
   YonestoAPI();
   Future<bool> getProducts() async {
     // Make Request
@@ -33,16 +39,25 @@ class YonestoAPI {
     return Future(() => false);
   }
 
-  Future<dynamic> createBuy(BuyRequest buyRequest) async {
-    final response = await http.post(
-      Uri.parse('${YonestoBase.url}/buy/create/'),
-      body: jsonEncode(buyRequest.toJson()),
-      headers: {'Content-Type': 'application/json'},
-    );
-    if (response.statusCode == 201) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Failed to create buy');
+  Future<bool> createBuy(BuyRequest buyRequest) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${YonestoBase.url}/buy/create/'),
+        body: jsonEncode(buyRequest.toJson()),
+        headers: headers,
+      );
+
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        return false;
+      }
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
+
+    return true;
   }
 }
