@@ -1,7 +1,7 @@
 import 'package:yonesto_ui/models/product_request.dart';
 
 class BuyRequest {
-  dynamic clientCode;
+  int clientCode;
   double payment;
   List<ProductRequest> products;
 
