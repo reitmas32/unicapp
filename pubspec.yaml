@@ -47,6 +47,8 @@ dependencies:
   eva_icons_flutter: ^3.1.0
   flutter_dotenv: ^5.1.0
   flutter_secure_storage: ^9.0.0
+  flutter_loading_animation_kit: ^0.0.2
+  icon_animated: ^1.2.1
   
 dev_dependencies:
   flutter_test:

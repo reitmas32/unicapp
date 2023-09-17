@@ -126,6 +126,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  flutter_loading_animation_kit:
+    dependency: "direct main"
+    description:
+      name: flutter_loading_animation_kit
+      sha256: "1115cb9118fe303aec45432a7ace203cc4a1e4e700369f480ff678cc4b0ec0b7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -216,6 +224,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  icon_animated:
+    dependency: "direct main"
+    description:
+      name: icon_animated
+      sha256: "0847039648c98e53ac9be16cac170c025461caeb4d890cf4f88c78578ef9e7aa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   js:
     dependency: transitive
     description:
