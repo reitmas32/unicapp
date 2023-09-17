@@ -4,7 +4,7 @@ import 'package:yonesto_ui/service/data_static.dart';
 import 'package:yonesto_ui/ui/views/signin/body.dart';
 import 'package:yonesto_ui/ui/views/signin/dont_account.dart';
 import 'package:yonesto_ui/ui/views/signin/form.dart';
-import 'package:yonesto_ui/ui/widgets/yonesto_appbar.dart';
+import 'package:yonesto_ui/ui/views/common/app_bar.dart';
 
 class SingInPage extends StatefulWidget {
   const SingInPage({super.key});
@@ -25,7 +25,7 @@ class _SingInPageState extends State<SingInPage> {
   }
 
   Future<void> loadJWT() async {
-    if (await StorageConection.isSessionActive()) {
+    if (!await StorageConection.isSessionActive()) {
       // ignore: use_build_context_synchronously
       context.go('/home');
     }
