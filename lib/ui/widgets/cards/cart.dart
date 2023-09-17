@@ -88,7 +88,7 @@ class CartCard extends StatelessWidget {
 
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
-                child: Container(child: const Icon(Icons.delete)),
+                child: const Icon(Icons.delete),
               )
             ],
           ),
