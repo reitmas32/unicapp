@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:yonesto_ui/models/product.dart';
 import 'package:yonesto_ui/providers/cart.dart';
-import 'package:yonesto_ui/ui/views/yonesto/list_cart.dart';
+import 'package:yonesto_ui/ui/views/yonesto/cart_products.dart';
 import 'package:yonesto_ui/ui/views/common/app_bar.dart';
 
 class CartPage extends StatefulWidget {
