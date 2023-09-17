@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:yonesto_ui/ui/views/common/drawer.dart';
 import 'package:yonesto_ui/ui/views/yonesto/cart_products.dart';
-import 'package:yonesto_ui/ui/widgets/buttons/simple.dart';
-import 'package:yonesto_ui/ui/widgets/buttons/theme_button.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/product.dart';
 import 'package:yonesto_ui/providers/cart.dart';
