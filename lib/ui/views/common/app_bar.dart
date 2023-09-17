@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yonesto_ui/ui/widgets/theme_button.dart';
+import 'package:yonesto_ui/ui/widgets/buttons/theme_button.dart';
 
-class YonestoAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const YonestoAppBar({
+class UNICappAppBar extends StatefulWidget implements PreferredSizeWidget {
+  const UNICappAppBar({
     super.key,
     required this.title,
   });
@@ -11,13 +11,13 @@ class YonestoAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Widget title;
 
   @override
-  State<YonestoAppBar> createState() => _YonestoAppBarState();
+  State<UNICappAppBar> createState() => _UNICappAppBarState();
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-class _YonestoAppBarState extends State<YonestoAppBar> {
+class _UNICappAppBarState extends State<UNICappAppBar> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
