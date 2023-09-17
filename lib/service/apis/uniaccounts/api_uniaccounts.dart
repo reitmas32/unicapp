@@ -43,6 +43,8 @@ class AccountAPI {
           databaseStatic.jwt = responseData['Data']['token_jwt'];
           databaseStatic.userName = user.userName;
           StorageConection.writeJWT(databaseStatic.jwt);
+          String code = StorageConection.decodeCode(user.password);
+          StorageConection.writeCode(code.toString());
         }
       }
 
