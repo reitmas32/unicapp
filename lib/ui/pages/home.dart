@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:yonesto_ui/ui/widgets/awesom_button.dart';
-import 'package:yonesto_ui/ui/widgets/theme_button.dart';
+import 'package:yonesto_ui/ui/views/yonesto/list_cart.dart';
+import 'package:yonesto_ui/ui/widgets/buttons/simple.dart';
+import 'package:yonesto_ui/ui/widgets/buttons/theme_button.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/product.dart';
 import 'package:yonesto_ui/providers/cart.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/service/data_static.dart';
-import 'package:yonesto_ui/ui/widgets/list_of_cart.dart';
-import 'package:yonesto_ui/ui/widgets/wrap_products.dart';
-import 'package:yonesto_ui/ui/widgets/yonesto_appbar.dart';
+import 'package:yonesto_ui/ui/views/yonesto/wrap_products.dart';
+import 'package:yonesto_ui/ui/views/common/app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
             )
           : null,
       drawer: const YonestoDrawer(),
-      appBar: YonestoAppBar(
+      appBar: UNICappAppBar(
         title: SearchBar(
           onChanged: cart.updateDisplay,
         ),
@@ -139,7 +139,7 @@ class YonestoDrawer extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: AwesomButton(
+            child: SimpleButton(
               lable: 'Pay debts',
               onTap: () {},
             ),
@@ -149,10 +149,11 @@ class YonestoDrawer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               const ThemeButton(),
-              AwesomButton(
+              SimpleButton(
                 lable: 'Sign Out',
                 onTap: () async {
                   if (await StorageConection.cleanJWT()) {
+                    await StorageConection.cleanCode();
                     // ignore: use_build_context_synchronously
                     context.go('/');
                   }
@@ -214,15 +215,15 @@ class ContentShop extends StatelessWidget {
     return size.width > 750
         ? Row(
             children: [
-              WrapProducts(
+              ShopProducts(
                 displayProducts: displayProducts,
               ),
-              ListOfCart(
+              CartProducts(
                 displayProducts: cart.getCart(),
               )
             ],
           )
-        : WrapProducts(
+        : ShopProducts(
             displayProducts: displayProducts,
           );
   }
