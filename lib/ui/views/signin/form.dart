@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/models/user.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
-import 'package:yonesto_ui/ui/widgets/awesom_button.dart';
-import 'package:yonesto_ui/ui/widgets/minimalist_text_field.dart';
+import 'package:yonesto_ui/ui/widgets/buttons/simple.dart';
+import 'package:yonesto_ui/ui/widgets/input/minimalist_text_filed.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -19,8 +19,6 @@ class _SignInFormState extends State<SignInForm> {
   TextEditingController userNameController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
-
-  TextEditingController userCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +42,6 @@ class _SignInFormState extends State<SignInForm> {
             lable: 'Password',
             isPassword: true,
             controller: passwordController,
-          ),
-          MinimalistTextField(
-            lable: 'User Code',
-            controller: userCodeController,
           ),
           if (size.width > 700)
             Row(
@@ -97,7 +91,7 @@ class _SignInFormState extends State<SignInForm> {
             padding: const EdgeInsets.symmetric(
               horizontal: 100,
             ),
-            child: AwesomButton(
+            child: SimpleButton(
               lable: 'Sign Out',
               onTap: singIn,
             ),
