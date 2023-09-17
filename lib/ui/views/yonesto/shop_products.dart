@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yonesto_ui/models/product.dart';
-import 'package:yonesto_ui/ui/widgets/shopping_card.dart';
+import 'package:yonesto_ui/ui/widgets/cards/shop.dart';
 
-class WrapProducts extends StatelessWidget {
-  const WrapProducts({super.key, required this.displayProducts});
+class ShopProducts extends StatelessWidget {
+  const ShopProducts({super.key, required this.displayProducts});
 
   final List<Product> displayProducts;
 
