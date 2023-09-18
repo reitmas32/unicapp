@@ -73,6 +73,7 @@ class _CompletePurchaseDialogState extends State<CompletePurchaseDialog> {
           ActionButton(
             onTap: () async {
               createBuy(cart);
+              cart.cleanCart();
               //context.go('/home');
             },
             lable: 'Finalizar',
@@ -83,7 +84,7 @@ class _CompletePurchaseDialogState extends State<CompletePurchaseDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           MultipleTextField(
-            lable: 'Cunato Pagaras',
+            lable: 'Cuanto Pagaras',
             padding: const EdgeInsets.symmetric(
               vertical: 15.0,
             ),
