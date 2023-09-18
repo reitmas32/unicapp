@@ -40,7 +40,7 @@ class ShoppingCard extends StatelessWidget {
           children: [
             Center(
               child: Image.network(
-                'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
+                product.image,
                 height: 60,
               ),
             ),
