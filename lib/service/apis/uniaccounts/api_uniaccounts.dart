@@ -1,5 +1,3 @@
-//import 'package:http/http.dart' as http;
-//import 'package:yonesto_ui/service/apis/uniaccounts/base.dart' as BASE;
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -12,7 +10,7 @@ import 'package:yonesto_ui/service/data_static.dart';
 class AccountAPI {
   final Map<String, String> headers = {
     'Content-Type': 'application/json',
-    'Api-Key': dotenv.env['API_KEY'] ?? '',
+    'Api-Key': dotenv.env['UNIACCONTS_API_KEY'] ?? '',
     'Service': dotenv.env['SERVICE_NAME'] ?? '',
   };
 
