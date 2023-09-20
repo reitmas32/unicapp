@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/service/data_static.dart';
 import 'package:yonesto_ui/ui/views/signin/body.dart';
 import 'package:yonesto_ui/ui/views/signin/dont_account.dart';
@@ -25,7 +26,8 @@ class _SingInPageState extends State<SingInPage> {
   }
 
   Future<void> loadJWT() async {
-    if (!await StorageConection.isSessionActive()) {
+    var responseJWT = await uniaccountsAPI.storage.loadJWT();
+    if (responseJWT.data != '') {
       // ignore: use_build_context_synchronously
       context.go('/home');
     }
