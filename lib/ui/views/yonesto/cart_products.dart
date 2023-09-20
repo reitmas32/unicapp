@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yonesto_ui/models/product.dart';
+import 'package:yonesto_ui/domain/models/product/product.dart';
 import 'package:yonesto_ui/ui/views/diialogs/complete_purchase.dart';
 import 'package:yonesto_ui/ui/widgets/cards/cart.dart';
 
