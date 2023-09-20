@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:yonesto_ui/domain/models/proccess_response/proccess_response.dart';
+import 'package:yonesto_ui/domain/models/product/product.dart';
+import 'package:yonesto_ui/domain/models/product/product_getway.dart';
 import 'package:yonesto_ui/models/buy_request.dart';
 import 'package:yonesto_ui/models/pay_debts_response.dart';
 import 'package:yonesto_ui/models/product_response.dart';
@@ -9,39 +12,20 @@ import 'package:yonesto_ui/models/unpaid_buy_response.dart';
 import 'package:yonesto_ui/service/apis/yonesto/base.dart';
 import 'package:yonesto_ui/service/data_static.dart';
 
-class YonestoAPI {
+class YonestoAPI extends ProductsAPI {
   final Map<String, String> headers = {
     'Content-Type': 'application/json',
     'Authorization': 'Token ${dotenv.env['YONESTO_API_KEY']}',
   };
-  YonestoAPI();
-  Future<bool> getProducts() async {
-    // Make Request
-    var uri = Uri.parse('${YonestoBase.url}/product/info');
-    var response = await http.get(uri);
+  YonestoAPI({required super.storage});
 
-    // Check Status Code
-    if (response.statusCode == 200) {
-      // La petición fue exitosa, extraer los datos del cuerpo de la respuesta
-      Map<String, dynamic> responseData = jsonDecode(response.body);
-
-      // Acceder a los datos específicos dentro del objeto responseData
-      var productsResponse = ProductsResponse.fromJson(responseData);
-      var success = productsResponse.success;
-
-      // Load Data
-      if (success) {
-        databaseStatic.products.clear();
-        databaseStatic.products = productsResponse.data;
-      }
-
-      return Future(() => success);
-    }
-
-    return Future(() => false);
-  }
-
-  Future<bool> createBuy(BuyRequest buyRequest) async {
+  @override
+  Future<ProccessResponce> createBuy(BuyRequest buyRequest) async {
+    var responsesProccess = ProccessResponce(
+      success: false,
+      data: [],
+      code: 500,
+    );
     try {
       final response = await http.post(
         Uri.parse('${YonestoBase.url}/buy/create/'),
@@ -50,24 +34,22 @@ class YonestoAPI {
       );
 
       if (response.statusCode == 201) {
-        return true;
-      } else {
-        return false;
+        responsesProccess.success = true;
       }
+      responsesProccess.code = response.statusCode;
+      responsesProccess.data = jsonDecode(response.body);
     } on Exception catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+      responsesProccess.data = e.toString();
     }
-
-    return true;
+    return responsesProccess;
   }
 
-  Future<UnpaidBuyResponse> getUnpaidBuys(int code) async {
-    var responseProcess = UnpaidBuyResponse(
-      numberBuys: 0,
-      successRequest: false,
-      totalRemainingAmount: 0.0,
+  @override
+  Future<ProccessResponce> getDebts(int code) async {
+    var responsesProccess = ProccessResponce(
+      success: false,
+      data: [],
+      code: 500,
     );
     try {
       final response = await http.get(
@@ -76,26 +58,57 @@ class YonestoAPI {
       );
       Map<String, dynamic> responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        responseProcess.successRequest = true;
-        responseProcess.numberBuys =
-            responseData['Data']?['number_buys'].toInt();
-        responseProcess.totalRemainingAmount =
-            responseData['Data']?['total_remaining_amount'];
+        responsesProccess.success = true;
+        responsesProccess.data = {
+          'numberBuys': responseData['Data']?['number_buys'].toInt(),
+          'totalRemainingAmount': responseData['Data']
+              ?['total_remaining_amount']
+        };
       }
     } on Exception catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+      responsesProccess.data = e.toString();
     }
-
-    return responseProcess;
+    return responsesProccess;
   }
 
-  Future<PayDebtsResponse> payDebts(int code, double pay) async {
-    var responseProcess = PayDebtsResponse(
-      userCode: code,
-      pay: pay,
-      successRequest: false,
+  @override
+  Future<ProccessResponce> getProducts() async {
+    var responsesProccess = ProccessResponce(
+      success: false,
+      data: [],
+      code: 500,
+    );
+    try {
+      // Make Request
+      var uri = Uri.parse('${YonestoBase.url}/product/info');
+      var response = await http.get(uri);
+
+      // Check Status Code
+      if (response.statusCode == 200) {
+        // La petición fue exitosa, extraer los datos del cuerpo de la respuesta
+        Map<String, dynamic> responseData = jsonDecode(response.body);
+
+        // Acceder a los datos específicos dentro del objeto responseData
+        var productsResponse = ProductsResponse.fromJson(responseData);
+
+        responsesProccess.success = productsResponse.success;
+        responsesProccess.code = response.statusCode;
+        responsesProccess.data = productsResponse.data;
+
+        storage.saveCode('10064');
+      }
+    } on Exception catch (e) {
+      responsesProccess.data = e.toString();
+    }
+    return responsesProccess;
+  }
+
+  @override
+  Future<ProccessResponce> payDebts(int code, double pay) async {
+    var responsesProccess = ProccessResponce(
+      success: false,
+      data: [],
+      code: 500,
     );
     try {
       final response = await http.post(
@@ -106,16 +119,14 @@ class YonestoAPI {
         }),
         headers: headers,
       );
-      Map<String, dynamic> responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        responseProcess.successRequest = true;
+        responsesProccess.success = true;
       }
+      responsesProccess.data = jsonDecode(response.body);
     } on Exception catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+      responsesProccess.data = e.toString();
     }
 
-    return responseProcess;
+    return responsesProccess;
   }
 }
