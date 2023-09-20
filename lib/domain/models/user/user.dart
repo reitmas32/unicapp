@@ -8,18 +8,19 @@ class User {
   String password;
   String role;
   String id;
+  String jwt;
 
-  User({
-    this.name = '',
-    this.lastName = '',
-    this.email = '',
-    this.userName = '',
-    this.phoneNumber = '',
-    this.dateOfBirth = '',
-    this.password = '',
-    this.role = '',
-    this.id = '',
-  });
+  User(
+      {this.name = '',
+      this.lastName = '',
+      this.email = '',
+      this.userName = '',
+      this.phoneNumber = '',
+      this.dateOfBirth = '',
+      this.password = '',
+      this.role = '',
+      this.id = '',
+      this.jwt = ''});
 
   static User fromJson(Map<String, dynamic> data) {
     return User(
