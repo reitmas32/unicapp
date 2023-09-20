@@ -3,7 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
-import 'package:yonesto_ui/models/user.dart';
+import 'package:yonesto_ui/domain/models/proccess_response/proccess_response.dart';
+import 'package:yonesto_ui/domain/models/user/user.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/ui/widgets/buttons/simple.dart';
 import 'package:yonesto_ui/ui/widgets/input/minimalist_text_filed.dart';
@@ -118,7 +119,7 @@ class _SignInFormState extends State<SignInForm> {
       },
     );
 
-    var response = await uniaccountsAPI.signIn(User(
+    ProccessResponce response = await uniaccountsAPI.singIn(User(
       userName: userNameController.text,
       password: passwordController.text,
     ));
@@ -127,16 +128,16 @@ class _SignInFormState extends State<SignInForm> {
     Navigator.pop(context);
     String message = '';
 
-    if (response == 200) {
+    if (response.code == 200) {
       message = 'Todo BIen';
     }
-    if (response == 500) {
+    if (response.code == 500) {
       message = 'No existe el usuario';
     }
-    if (response == 401) {
+    if (response.code == 401) {
       message = 'NO apy Key valid';
     }
-    if (response == 400) {
+    if (response.code == 400) {
       message = 'Faltan parametros';
     }
 
@@ -153,7 +154,7 @@ class _SignInFormState extends State<SignInForm> {
         duration: const Duration(seconds: 2),
       ),
     );
-    if (response == 200) {
+    if (response.code == 200) {
       // ignore: use_build_context_synchronously
       context.go('/home');
     }
