@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:yonesto_ui/domain/models/proccess_response/proccess_response.dart';
 import 'package:yonesto_ui/ui/views/common/drawer.dart';
 import 'package:yonesto_ui/ui/views/yonesto/cart_products.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
-import 'package:yonesto_ui/models/product.dart';
+import 'package:yonesto_ui/domain/models/product/product.dart';
 import 'package:yonesto_ui/providers/cart.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/service/data_static.dart';
@@ -28,9 +29,15 @@ class _HomePageState extends State<HomePage> {
   bool dataIsReady = false;
 
   Future<void> getProducts() async {
+    //final cart = Provider.of<CartProvider>(context);
+
+    // if (cart.shop.isEmpty) {
     if (databaseStatic.products.isEmpty) {
-      await yonestoAPI.getProducts();
+      var resultProducts = await yonestoAPI.getProducts();
+      databaseStatic.products = resultProducts.data;
     }
+    // }
+
     //if (response) {
     setState(() {
       dataIsReady = true;
