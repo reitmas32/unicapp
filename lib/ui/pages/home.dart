@@ -1,57 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_loading_animation_kit/flutter_loading_animation_kit.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:yonesto_ui/domain/models/proccess_response/proccess_response.dart';
+import 'package:yonesto_ui/providers/providers.dart';
 import 'package:yonesto_ui/ui/views/common/drawer.dart';
-import 'package:yonesto_ui/ui/views/yonesto/cart_products.dart';
-import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
-import 'package:yonesto_ui/providers/cart.dart';
-import 'package:yonesto_ui/service/apis/api_conection.dart';
-import 'package:yonesto_ui/service/data_static.dart';
+
 import 'package:yonesto_ui/ui/views/yonesto/shop_products.dart';
 import 'package:yonesto_ui/ui/views/common/app_bar.dart';
+import 'package:yonesto_ui/ui/widgets/molecules/appbar.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
-    getProducts();
   }
 
-  bool dataIsReady = false;
-
-  Future<void> getProducts() async {
-    //final cart = Provider.of<CartProvider>(context);
-
-    // if (cart.shop.isEmpty) {
-    if (databaseStatic.products.isEmpty) {
-      var resultProducts = await yonestoAPI.getProducts();
-      databaseStatic.products = resultProducts.data;
-    }
-    // }
-
-    //if (response) {
-    setState(() {
-      dataIsReady = true;
-    });
-    //}
-  }
-
+  String lable = '';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final cart = Provider.of<CartProvider>(context);
-    if (cart.shop.isEmpty) {
-      cart.loadShop(databaseStatic.products);
-    }
+    final displayProducts = ref.watch(filterCartProvider(lable));
     return Scaffold(
       floatingActionButton: size.width < 750
           ? Stack(
@@ -66,83 +42,61 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                 ),
-                if (cart.quanty != 0)
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                      ),
-                      child: AnimatedSwitcher(
-                        duration: const Duration(
-                            milliseconds: 500), // Duración de la animación
-                        transitionBuilder: (child, animation) {
-                          return ScaleTransition(
-                            scale: animation,
-                            child: child,
-                          );
-                        },
-                        child: Text(
-                          cart.quanty.toString(),
-                          key: ValueKey<int>(cart
-                              .quanty), // Identificar el widget para la animación
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
+                //if (cart.quanty != 0)
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(
+                          milliseconds: 500), // Duración de la animación
+                      transitionBuilder: (child, animation) {
+                        return ScaleTransition(
+                          scale: animation,
+                          child: child,
+                        );
+                      },
+                      child: const Text(
+                        '5',
+                        key: ValueKey<int>(
+                            5), // Identificar el widget para la animación
+                        style: TextStyle(
+                          fontSize: 16,
                         ),
                       ),
                     ),
                   ),
+                ),
               ],
             )
           : null,
       drawer: const YonestoDrawer(),
       appBar: UNICappAppBar(
-        title: SearchBar(
-          onChanged: cart.updateDisplay,
+        title: YonestoSearchBar(
+          onChanged: (value) {
+            setState(() {
+              lable = value;
+            });
+          },
         ),
       ),
-      body: !dataIsReady
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: Colors.purple,
-              ),
-            )
-          : ContentShop(
-              displayProducts: cart.display,
-            ),
-    );
-  }
-}
-
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key, this.onChanged});
-
-  final void Function(String)? onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final currentColor = Provider.of<ThemeProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(25.0),
-      child: TextField(
-        onChanged: onChanged,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: currentColor.isDarkTheme()
-              ? const Color.fromARGB(255, 35, 34, 34)
-              : const Color.fromARGB(255, 199, 197, 197),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide.none,
-          ),
-          hintText: "eg: CocaCola",
-          suffixIcon: const Icon(
-            Icons.search,
-            color: Colors.purple,
+      body: displayProducts.when(
+        data: (data) => ContentShop(displayProducts: data),
+        error: (err, __) => Center(child: Text('Error: $err')),
+        loading: () => const Center(
+          child: FourCirclePulse(
+            circleColor: Colors.purple, //The color of the circles
+            dimension: 100, // The size of the widget.
+            turns: 3, //Turns in each loop
+            loopDuration: Duration(
+              milliseconds: 800,
+            ), // Duration of each loop
+            curve: Curves.linear, //Curve of the animation
           ),
         ),
       ),
@@ -157,22 +111,10 @@ class ContentShop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context);
-
     final size = MediaQuery.of(context).size;
-    return size.width > 750
-        ? Row(
-            children: [
-              ShopProducts(
-                displayProducts: displayProducts,
-              ),
-              CartProducts(
-                displayProducts: cart.getCart(),
-              )
-            ],
-          )
-        : ShopProducts(
-            displayProducts: displayProducts,
-          );
+
+    return ShopProducts(
+      displayProducts: displayProducts,
+    );
   }
 }
