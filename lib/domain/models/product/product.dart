@@ -23,6 +23,33 @@ class Product {
     this.quantity,
   });
 
+  // Implementación de copyWith
+  Product copyWith({
+    String? id,
+    String? product,
+    String? code,
+    String? name,
+    int? stock,
+    double? purchasePrice,
+    double? salePrice,
+    String? image,
+    bool? selected,
+    int? quantity,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      product: product ?? this.product,
+      code: code ?? this.code,
+      name: name ?? this.name,
+      stock: stock ?? this.stock,
+      purchasePrice: purchasePrice ?? this.purchasePrice,
+      salePrice: salePrice ?? this.salePrice,
+      image: image ?? this.image,
+      selected: selected ?? this.selected,
+      quantity: quantity ?? this.quantity,
+    );
+  }
+
   factory Product.fromJson(Map<String, dynamic> map) {
     return Product(
       id: map['id'],
