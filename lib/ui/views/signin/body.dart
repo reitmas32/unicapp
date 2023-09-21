@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
+import 'package:yonesto_ui/providers/providers.dart';
 
-class SignInBody extends StatelessWidget {
+class SignInBody extends ConsumerWidget {
   const SignInBody({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final currentTheme = Provider.of<ThemeProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(isDarkModeProvider);
     return Column(
       children: [
         Padding(
@@ -26,8 +28,7 @@ class SignInBody extends StatelessWidget {
         Text(
           'Sign in with you username and password',
           style: GoogleFonts.roboto(
-            fontWeight:
-                currentTheme.isDarkTheme() ? FontWeight.w200 : FontWeight.w300,
+            fontWeight: isDarkMode ? FontWeight.w200 : FontWeight.w300,
             fontSize: 15,
           ),
         ),
