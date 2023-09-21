@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
+import 'package:yonesto_ui/providers/providers.dart';
 import 'package:yonesto_ui/ui/views/diialogs/complete_purchase.dart';
 import 'package:yonesto_ui/ui/widgets/cards/cart.dart';
 
-class CartProducts extends StatelessWidget {
+class CartProducts extends ConsumerStatefulWidget {
   const CartProducts({
     super.key,
     required this.displayProducts,
@@ -11,6 +13,11 @@ class CartProducts extends StatelessWidget {
 
   final List<Product> displayProducts;
 
+  @override
+  ConsumerState<CartProducts> createState() => _CartProductsState();
+}
+
+class _CartProductsState extends ConsumerState<CartProducts> {
   void showDelayedAlertDialog(BuildContext context, bool responseSuccess) {
     Future.delayed(const Duration(seconds: 2), () {
       showDialog(
@@ -41,11 +48,20 @@ class CartProducts extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: displayProducts.length,
+              itemCount: widget.displayProducts.length,
               itemBuilder: (context, index) {
                 return CartCard(
-                  product: displayProducts[index],
-                );
+                    product: widget.displayProducts[index],
+                    onDelete: () {
+                      setState(() {
+                        ref
+                            .read(shopProvider.notifier)
+                            .resetStock(widget.displayProducts[index]);
+                        ref
+                            .read(cartProvider.notifier)
+                            .delete(widget.displayProducts[index]);
+                      });
+                    });
               },
             ),
           ),

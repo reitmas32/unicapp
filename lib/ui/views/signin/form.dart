@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/domain/models/proccess_response/proccess_response.dart';
 import 'package:yonesto_ui/domain/models/user/user.dart';
+import 'package:yonesto_ui/providers/theme.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/ui/widgets/buttons/simple.dart';
 import 'package:yonesto_ui/ui/widgets/input/minimalist_text_filed.dart';
 
-class SignInForm extends StatefulWidget {
+class SignInForm extends ConsumerStatefulWidget {
   const SignInForm({super.key});
 
   @override
-  State<SignInForm> createState() => _SignInFormState();
+  ConsumerState<SignInForm> createState() => _SignInFormState();
 }
 
-class _SignInFormState extends State<SignInForm> {
+class _SignInFormState extends ConsumerState<SignInForm> {
   TextEditingController userNameController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = Provider.of<ThemeProvider>(context);
+    final isDarkMode = ref.watch(isDarkModeProvider);
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -56,9 +58,8 @@ class _SignInFormState extends State<SignInForm> {
                   child: Text(
                     'Forgot Password',
                     style: GoogleFonts.roboto(
-                      fontWeight: currentTheme.isDarkTheme()
-                          ? FontWeight.w200
-                          : FontWeight.w300,
+                      fontWeight:
+                          isDarkMode ? FontWeight.w200 : FontWeight.w300,
                       fontSize: 15,
                     ),
                   ),
@@ -78,9 +79,7 @@ class _SignInFormState extends State<SignInForm> {
               child: Text(
                 'Forgot Password',
                 style: GoogleFonts.roboto(
-                  fontWeight: currentTheme.isDarkTheme()
-                      ? FontWeight.w200
-                      : FontWeight.w300,
+                  fontWeight: isDarkMode ? FontWeight.w200 : FontWeight.w300,
                   fontSize: 15,
                 ),
               ),
@@ -161,20 +160,21 @@ class _SignInFormState extends State<SignInForm> {
   }
 }
 
-class RememberMe extends StatefulWidget {
+class RememberMe extends ConsumerStatefulWidget {
   const RememberMe({
     super.key,
   });
 
   @override
-  State<RememberMe> createState() => _RememberMeState();
+  ConsumerState<RememberMe> createState() => _RememberMeState();
 }
 
-class _RememberMeState extends State<RememberMe> {
+class _RememberMeState extends ConsumerState<RememberMe> {
   bool remember = false;
   @override
   Widget build(BuildContext context) {
-    final currentTheme = Provider.of<ThemeProvider>(context);
+    final isDarkMode = ref.watch(isDarkModeProvider);
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 15.0,
@@ -194,9 +194,7 @@ class _RememberMeState extends State<RememberMe> {
           Text(
             'Remember me',
             style: GoogleFonts.roboto(
-              fontWeight: currentTheme.isDarkTheme()
-                  ? FontWeight.w200
-                  : FontWeight.w300,
+              fontWeight: isDarkMode ? FontWeight.w200 : FontWeight.w300,
               fontSize: 15,
             ),
           ),

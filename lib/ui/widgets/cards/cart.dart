@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:unihacks_ui_kit/themes/theme_provider.dart';
-import 'package:yonesto_ui/models/product.dart';
-import 'package:yonesto_ui/providers/cart.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yonesto_ui/domain/models/product/product.dart';
+import 'package:yonesto_ui/providers/providers.dart';
 
-class CartCard extends StatelessWidget {
+class CartCard extends ConsumerStatefulWidget {
   CartCard({
     super.key,
     required this.product,
+    required this.onDelete,
   });
 
   final Product product;
   final List<bool> starStates = [true, true, true, false, false];
+  final VoidCallback onDelete;
 
   @override
+  ConsumerState<ConsumerStatefulWidget> createState() => CartCardState();
+}
+
+class CartCardState extends ConsumerState<CartCard> {
+  @override
   Widget build(BuildContext context) {
-    final currentColor = Provider.of<ThemeProvider>(context);
-    final cart = Provider.of<CartProvider>(context);
+    final isDarkMode = ref.watch(isDarkModeProvider);
     return Card(
-      color: currentColor.isDarkTheme()
+      color: isDarkMode
           ? const Color.fromARGB(255, 35, 34, 34)
           : const Color.fromARGB(255, 199, 197, 197),
       child: Padding(
@@ -30,7 +35,7 @@ class CartCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.network(
-                  product.image,
+                  'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
                   height: 150,
                 ),
               ),
@@ -39,7 +44,7 @@ class CartCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
-                      product.name,
+                      widget.product.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -52,16 +57,18 @@ class CartCard extends StatelessWidget {
                     children: List.generate(
                       5,
                       (index) => Icon(
-                        starStates[index] ? Icons.star : Icons.star_border,
+                        widget.starStates[index]
+                            ? Icons.star
+                            : Icons.star_border,
                         color: Colors.purple,
                         size: 15,
                       ),
                     ),
                   ),
-                  Text('${product.stock} Unidades'),
+                  Text('${widget.product.stock} Unidades'),
                   Row(
                     children: [
-                      Text('\$${product.salePrice}'),
+                      Text('\$${widget.product.salePrice}'),
                     ],
                   )
                 ],
@@ -69,18 +76,18 @@ class CartCard extends StatelessWidget {
               const Spacer(),
               InkWell(
                 onTap: () {
-                  cart.deleteToCart(product);
+                  widget.onDelete();
                   var snackBar = SnackBar(
                     content: Text(
-                      '¡Se Eliminaron todos los ${product.name} del Carrito!',
+                      '¡Se Eliminaron todos los ${widget.product.name} del Carrito!',
                       style: TextStyle(
-                        color: currentColor.isDarkTheme()
+                        color: isDarkMode
                             ? const Color.fromARGB(255, 199, 197, 197)
                             : const Color.fromARGB(255, 35, 34, 34),
                       ),
                     ),
                     duration: const Duration(milliseconds: 750),
-                    backgroundColor: currentColor.isDarkTheme()
+                    backgroundColor: isDarkMode
                         ? const Color.fromARGB(255, 35, 34, 34)
                         : const Color.fromARGB(
                             255, 199, 197, 197), // Duración de la visibilidad
