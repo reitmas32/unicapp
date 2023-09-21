@@ -1,26 +1,29 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
+import 'package:yonesto_ui/providers/shop.dart';
+import 'package:yonesto_ui/tools/tools.dart';
 
-class CartProvider with ChangeNotifier {
-  List<Product> cart = [];
-  List<Product> shop = [];
-  List<Product> display = [];
-  int quanty = 0;
+class Cart extends StateNotifier<List<Product>> {
+  // We initialize the list of todos to an empty list
+  Cart() : super([]);
 
-  addToCart(Product product) {
-    int productCartIndex = cart.indexWhere((item) => item.id == product.id);
-    int productShopIndex = shop.indexWhere((item) => item.id == product.id);
-    if (productShopIndex == -1) {
-      notifyListeners();
-      return;
+  bool add(List<Product> shop, Product product) {
+//Load Shop
+
+    final constaint2List =
+        indexWher2List<Product>(shop, state, (item) => item.id == product.id);
+
+    if (constaint2List < -1) {
+      return false;
     }
 
-    if (productCartIndex != -1) {
+    if (constaint2List != -1) {
       // El producto ya está en el carrito, aumenta la cantidad en stock
-      cart[productCartIndex].stock++;
+      state[constaint2List].stock++;
     } else {
-      // Agrega el producto al carrito si no estaba en él
-      cart.add(Product(
+      // Nuevo Producto
+
+      state.add(Product(
         id: product.id,
         name: product.name,
         stock: 1,
@@ -33,73 +36,30 @@ class CartProvider with ChangeNotifier {
         selected: product.selected,
       ));
     }
-    shop[productShopIndex].stock--;
-    quanty++;
 
-    notifyListeners();
+    return true;
   }
 
-  removeToCart(Product product) {
-    int productIndex = cart.indexWhere((item) => item.id == product.id);
-    int productShopIndex = shop.indexWhere((item) => item.id == product.id);
-    if (productShopIndex == -1) {
-      notifyListeners();
-      return;
-    }
+  bool remove(Product product) {
+    int productIndex = state.indexWhere((item) => item.id == product.id);
     if (productIndex != -1) {
       // El producto ya está en el carrito, aumenta la cantidad en stock
-      if (cart[productIndex].stock > 1) {
-        cart[productIndex].stock--;
+      if (state[productIndex].stock > 1) {
+        state[productIndex].stock--;
       } else {
-        cart.removeWhere((element) => element.id == product.id);
+        state.removeWhere((element) => element.id == product.id);
       }
-      quanty--;
-      shop[productShopIndex].stock++;
-    }
-    notifyListeners();
-  }
-
-  updateDisplay(String value) {
-    display = shop
-        .where((element) =>
-            element.name.toLowerCase().contains(value.toLowerCase()))
-        .toList();
-
-    notifyListeners();
-  }
-
-  loadShop(List<Product> products) {
-    shop = products;
-    display = shop;
-  }
-
-  deleteToCart(Product product) {
-    cart.removeWhere((element) => element.id == product.id);
-    quanty -= product.stock;
-    int productShopIndex = shop.indexWhere((item) => item.id == product.id);
-    if (productShopIndex != -1) {
-      shop[productShopIndex].stock += product.stock;
     }
 
-    notifyListeners();
+    return true;
   }
 
-  cleanCart() {
-    cart.clear();
-    notifyListeners();
-  }
-
-  double calculateTotal() {
-    double total = 0;
-
-    for (var product in cart) {
-      total += product.stock * product.salePrice;
-    }
-
-    return total;
-  }
-
-  List<Product> getCart() {
-    return cart;
+  bool delete(Product product) {
+    state.removeWhere((element) => element.id == product.id);
+    return true;
   }
 }
+
+final cartProvider = StateNotifierProvider<Cart, List<Product>>((ref) {
+  return Cart();
+});
