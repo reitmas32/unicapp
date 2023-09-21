@@ -49,6 +49,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   flutter_loading_animation_kit: ^0.0.2
   icon_animated: ^1.2.1
+  flutter_riverpod: ^2.4.0
   
 dev_dependencies:
   flutter_test:
