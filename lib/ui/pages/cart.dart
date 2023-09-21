@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
@@ -6,14 +7,14 @@ import 'package:yonesto_ui/providers/cart.dart';
 import 'package:yonesto_ui/ui/views/yonesto/cart_products.dart';
 import 'package:yonesto_ui/ui/views/common/app_bar.dart';
 
-class CartPage extends StatefulWidget {
+class CartPage extends ConsumerStatefulWidget {
   const CartPage({super.key});
 
   @override
-  State<CartPage> createState() => _CartPageState();
+  ConsumerState<CartPage> createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CartPageState extends ConsumerState<CartPage> {
   void updateProducts(String value) {
     setState(() {
       displayProducts = cartProducts
@@ -44,12 +45,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context);
-    cartProducts = cart.getCart();
-    if (!firstShow || !compareLists(cart.getCart(), displayProducts)) {
-      displayProducts = List.from(cartProducts);
-      firstShow = true;
-    }
+    final cart = ref.watch(cartProvider);
 
     return Scaffold(
       appBar: MinimalistAppBar(
@@ -65,7 +61,7 @@ class _CartPageState extends State<CartPage> {
       body: Column(
         children: [
           CartProducts(
-            displayProducts: displayProducts,
+            displayProducts: cart,
           ),
         ],
       ),
