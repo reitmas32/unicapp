@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
+import 'package:yonesto_ui/models/buy_request.dart';
+import 'package:yonesto_ui/models/product_request.dart';
 import 'package:yonesto_ui/providers/shop.dart';
+import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/tools/tools.dart';
 
 class Cart extends StateNotifier<List<Product>> {
@@ -58,8 +61,36 @@ class Cart extends StateNotifier<List<Product>> {
     state.removeWhere((element) => element.id == product.id);
     return true;
   }
+
+  bool clear() {
+    state.clear();
+    return true;
+  }
+
+  Future<bool> createBuy(int code, double payment) async {
+    BuyRequest buyRequest = BuyRequest(
+        clientCode: code,
+        payment: payment,
+        products: state
+            .map((product) => ProductRequest(
+                  product: product.id,
+                  quantity: product.stock,
+                ))
+            .toList());
+
+    var responseCreateBuy = await yonestoAPI.createBuy(buyRequest);
+    return responseCreateBuy.success;
+  }
 }
 
 final cartProvider = StateNotifierProvider<Cart, List<Product>>((ref) {
   return Cart();
+});
+
+final createBuy = FutureProvider.family
+    .autoDispose<bool, BuyRequest>((ref, buyRequest) async {
+  final shopProducts = await ref
+      .watch(cartProvider.notifier)
+      .createBuy(buyRequest.clientCode, buyRequest.payment);
+  return true;
 });

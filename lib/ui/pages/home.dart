@@ -28,6 +28,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final displayProducts = ref.watch(filterCartProvider(lable));
+    final cart = ref.watch(cartProvider);
     return Scaffold(
       floatingActionButton: size.width < 750
           ? Stack(
@@ -42,36 +43,36 @@ class _HomePageState extends ConsumerState<HomePage> {
                     color: Colors.white,
                   ),
                 ),
-                //if (cart.quanty != 0)
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    child: AnimatedSwitcher(
-                      duration: const Duration(
-                          milliseconds: 500), // Duración de la animación
-                      transitionBuilder: (child, animation) {
-                        return ScaleTransition(
-                          scale: animation,
-                          child: child,
-                        );
-                      },
-                      child: const Text(
-                        '5',
-                        key: ValueKey<int>(
-                            5), // Identificar el widget para la animación
-                        style: TextStyle(
-                          fontSize: 16,
+                if (false)
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: AnimatedSwitcher(
+                        duration: const Duration(
+                            milliseconds: 500), // Duración de la animación
+                        transitionBuilder: (child, animation) {
+                          return ScaleTransition(
+                            scale: animation,
+                            child: child,
+                          );
+                        },
+                        child: Text(
+                          totalProducts(cart).toString(),
+                          key: ValueKey<int>(
+                              5), // Identificar el widget para la animación
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
               ],
             )
           : null,
@@ -102,6 +103,14 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
     );
   }
+}
+
+int totalProducts(List<Product> products) {
+  int total = 0;
+  for (var product in products) {
+    total += product.stock;
+  }
+  return total;
 }
 
 class ContentShop extends StatelessWidget {

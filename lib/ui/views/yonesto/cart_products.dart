@@ -72,7 +72,9 @@ class _CartProductsState extends ConsumerState<CartProducts> {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return const CompletePurchaseDialog();
+                      return CompletePurchaseDialog(
+                        cart: widget.displayProducts,
+                      );
                     });
               },
               style: ElevatedButton.styleFrom(

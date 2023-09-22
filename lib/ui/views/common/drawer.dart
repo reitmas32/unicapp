@@ -109,15 +109,13 @@ class _PayDebtsState extends State<PayDebts> {
   loadUnpaidBuys() async {
     initProccessGetUnpaidsBuys = true;
 
-    var response = await yonestoAPI.getUnpaidBuys(
-      int.parse(
-        await StorageConection.readCode(),
-      ),
+    var response = await yonestoAPI.getDebts(
+      10064,
     );
 
-    responseSuccessGetUnpaidsBuys = response.successRequest;
+    responseSuccessGetUnpaidsBuys = response.success;
 
-    totalRemainingAmount = response.totalRemainingAmount;
+    totalRemainingAmount = response.data['totalRemainingAmount'];
 
     detachProccessGetUnpaidsBuys = true;
     setState(() {});
@@ -134,11 +132,10 @@ class _PayDebtsState extends State<PayDebts> {
     // ignore: use_build_context_synchronously
     setState(() {});
 
-    var responseSuccess = await yonestoAPI.payDebts(
-        int.parse(await StorageConection.readCode()), double.parse(payment));
-
+    var responseSuccess =
+        await yonestoAPI.payDebts(10064, double.parse(payment));
     setState(() {
-      responseSuccessPayBuys = responseSuccess.successRequest;
+      responseSuccessPayBuys = responseSuccess.success;
     });
 
     detachProcessPay = true;
@@ -151,8 +148,6 @@ class _PayDebtsState extends State<PayDebts> {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context);
-
     return initPay
         ? AlertDialogRequest(
             lable: 'Realizando Pago',
