@@ -5,7 +5,7 @@ import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
 import 'package:unicapp/core/uniaccounts/models/user_getway.dart';
 import 'package:unicapp/models/signin_response.dart';
 import 'package:unicapp/core/uniaccounts/models/user.dart';
-import 'package:unicapp/core/uniaccounts/services/api_conection.dart';
+import 'package:unicapp/core/api_conection.dart';
 import 'package:unicapp/core/uniaccounts/services/uniaccounts/base.dart';
 
 class AccountAPI extends AccontsUserAPI {

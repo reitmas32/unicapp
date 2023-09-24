@@ -5,7 +5,7 @@ import 'package:unicapp/domain/models/product/product.dart';
 import 'package:unicapp/models/buy_request.dart';
 import 'package:unicapp/models/product_request.dart';
 import 'package:unicapp/providers/providers.dart';
-import 'package:unicapp/core/uniaccounts/services/api_conection.dart';
+import 'package:unicapp/core/api_conection.dart';
 import 'package:unicapp/service/data_static.dart';
 import 'package:unicapp/ui/molecules/package.dart';
 import 'package:unicapp/ui/widgets/info/request.dart';
