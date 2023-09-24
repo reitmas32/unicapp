@@ -1,4 +1,4 @@
-import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
+import 'package:unicapp/shared/models/proccess_response.dart';
 import 'package:unicapp/domain/models/product/product_storage.dart';
 import 'package:unicapp/models/buy_request.dart';
 

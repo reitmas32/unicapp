@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:unicapp/apps/uniaccounts/molecules/accounts_textfields.dart';
 import 'package:unicapp/apps/uniaccounts/molecules/aditional_options.dart';
 import 'package:unicapp/apps/uniaccounts/molecules/sign_options.dart';
-import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
+import 'package:unicapp/shared/models/proccess_response.dart';
 import 'package:unicapp/core/uniaccounts/models/user.dart';
 import 'package:unicapp/core/api_conection.dart';
 

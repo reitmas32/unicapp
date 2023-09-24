@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
+import 'package:unicapp/shared/models/proccess_response.dart';
 import 'package:unicapp/core/uniaccounts/models/user_storage.dart';
 
 class UserStorageSecurityStorage extends UserStorage {
