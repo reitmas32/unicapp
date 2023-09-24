@@ -1,6 +1,6 @@
 import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
-import 'package:unicapp/domain/models/user/user.dart';
-import 'package:unicapp/domain/models/user/user_storage.dart';
+import 'package:unicapp/core/uniaccounts/models/user.dart';
+import 'package:unicapp/core/uniaccounts/models/user_storage.dart';
 
 abstract class AccontsUserAPI {
   final UserStorage storage;

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
-import 'package:unicapp/domain/models/user/user.dart';
+import 'package:unicapp/core/uniaccounts/models/user.dart';
 import 'package:unicapp/providers/theme.dart';
 import 'package:unicapp/service/apis/api_conection.dart';
 import 'package:unicapp/ui/molecules/package.dart';

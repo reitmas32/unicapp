@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
-import 'package:unicapp/domain/models/user/user_getway.dart';
+import 'package:unicapp/core/uniaccounts/models/user_getway.dart';
 import 'package:unicapp/models/signin_response.dart';
-import 'package:unicapp/domain/models/user/user.dart';
+import 'package:unicapp/core/uniaccounts/models/user.dart';
 import 'package:unicapp/service/apis/api_conection.dart';
 import 'package:unicapp/service/apis/uniaccounts/base.dart';
 
