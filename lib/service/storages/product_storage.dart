@@ -1,8 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:unicapp/shared/models/proccess_response.dart';
-import 'package:unicapp/domain/models/product/product_storage.dart';
+import 'package:unicapp/core/yonesto/models/yonesto_storage.dart';
 
-class ProductStorageSecurityStorage extends ProductStorage {
+class ProductStorageSecurityStorage extends YonestoStorage {
   final storageConection = const FlutterSecureStorage();
 
   @override

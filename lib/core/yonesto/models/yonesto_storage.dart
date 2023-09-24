@@ -1,6 +1,6 @@
 import 'package:unicapp/shared/models/proccess_response.dart';
 
-abstract class ProductStorage {
+abstract class YonestoStorage {
   Future<ProccessResponce> saveCode(String code);
   Future<ProccessResponce> loadCode();
   Future<ProccessResponce> cleanCode();
