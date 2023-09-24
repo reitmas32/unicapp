@@ -14,10 +14,6 @@ class SingInPage extends StatefulWidget {
 }
 
 class _SingInPageState extends State<SingInPage> {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
   @override
   initState() {
     super.initState();
