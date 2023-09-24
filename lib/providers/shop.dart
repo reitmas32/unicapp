@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/core/yonesto/models/product.dart';
 import 'package:unicapp/core/api_conection.dart';
 
 class Shop extends StateNotifier<List<Product>> {

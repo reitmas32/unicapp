@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/core/yonesto/models/product.dart';
 import 'package:unicapp/models/buy_request.dart';
 import 'package:unicapp/models/product_request.dart';
 import 'package:unicapp/providers/shop.dart';

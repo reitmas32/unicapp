@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/core/yonesto/models/product.dart';
 
 class StorageConection {
   List<Product> products = [];

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicapp/providers/providers.dart';
 import 'package:unicapp/ui/views/common/drawer.dart';
-import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/core/yonesto/models/product.dart';
 
 import 'package:unicapp/ui/views/yonesto/shop_products.dart';
 import 'package:unicapp/ui/views/common/app_bar.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/core/yonesto/models/product.dart';
 import 'package:unicapp/ui/molecules/package.dart';
 
 class ShopProducts extends StatelessWidget {

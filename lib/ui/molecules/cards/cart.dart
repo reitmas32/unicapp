@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/core/yonesto/models/product.dart';
 import 'package:unicapp/providers/providers.dart';
 import 'package:unicapp/ui/atoms/package.dart';
 import 'package:unicapp/ui/molecules/buttons/delete_cart.dart';
