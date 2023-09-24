@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unicapp/apps/uniaccounts/molecules/rememberme_chekbox.dart';
-import 'package:unicapp/providers/providers.dart';
+import 'package:unicapp/apps/yonesto/providers/providers.dart';
 
 class AditionalOptions extends ConsumerWidget {
   const AditionalOptions({

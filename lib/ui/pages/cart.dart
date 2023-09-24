@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicapp/core/yonesto/models/product.dart';
-import 'package:unicapp/providers/cart.dart';
+import 'package:unicapp/apps/yonesto/providers/cart.dart';
 import 'package:unicapp/ui/views/yonesto/cart_products.dart';
 import 'package:unicapp/ui/views/common/app_bar.dart';
 

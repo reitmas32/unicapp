@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unicapp/core/yonesto/models/product.dart';
 import 'package:unicapp/core/yonesto/models/buy_request.dart';
 import 'package:unicapp/core/yonesto/models/product_request.dart';
-import 'package:unicapp/providers/shop.dart';
+import 'package:unicapp/apps/yonesto/providers/shop.dart';
 import 'package:unicapp/core/api_conection.dart';
 import 'package:unicapp/shared/tools/tools.dart';
 

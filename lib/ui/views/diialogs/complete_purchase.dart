@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:unicapp/core/yonesto/models/product.dart';
 import 'package:unicapp/core/yonesto/models/buy_request.dart';
 import 'package:unicapp/core/yonesto/models/product_request.dart';
-import 'package:unicapp/providers/providers.dart';
+import 'package:unicapp/apps/yonesto/providers/providers.dart';
 import 'package:unicapp/core/api_conection.dart';
 import 'package:unicapp/service/data_static.dart';
 import 'package:unicapp/ui/molecules/package.dart';

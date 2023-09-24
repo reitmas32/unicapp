@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unicapp/providers/providers.dart';
+import 'package:unicapp/apps/yonesto/providers/providers.dart';
 import 'package:unicapp/ui/atoms/package.dart';
 
 class DeleteCartButton extends ConsumerWidget {

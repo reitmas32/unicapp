@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:unicapp/providers/theme.dart';
+import 'package:unicapp/shared/providers/theme.dart';
 
 class RememberMe extends ConsumerStatefulWidget {
   const RememberMe({
