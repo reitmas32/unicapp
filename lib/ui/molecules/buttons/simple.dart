@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yonesto_ui/ui/atoms/package.dart';
 
 class SimpleButton extends StatefulWidget {
   const SimpleButton({super.key, required this.lable, this.onTap});
@@ -13,27 +14,25 @@ class _SimpleButtonState extends State<SimpleButton> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(17),
+      borderRadius: BordersRadius.br500,
       child: SizedBox(
         //width: 300,
         height: 60,
         child: Stack(
           children: <Widget>[
-            Positioned.fill(
-              child: Container(
-                color: Colors.purple,
-              ),
-            ),
+            const BackgroudButton(),
             SizedBox(
               //width: 300,
               child: TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.all(16.0),
+                  padding: Paddings.p400,
                   textStyle: const TextStyle(fontSize: 20),
                 ),
                 onPressed: widget.onTap,
-                child: Center(child: Text(widget.lable)),
+                child: Center(
+                  child: Text(widget.lable),
+                ),
               ),
             ),
           ],

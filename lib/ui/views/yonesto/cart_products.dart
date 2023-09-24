@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
 import 'package:yonesto_ui/providers/providers.dart';
 import 'package:yonesto_ui/ui/views/diialogs/complete_purchase.dart';
-import 'package:yonesto_ui/ui/widgets/cards/cart.dart';
+import 'package:yonesto_ui/ui/molecules/package.dart';
 
 class CartProducts extends ConsumerStatefulWidget {
   const CartProducts({
@@ -51,17 +51,13 @@ class _CartProductsState extends ConsumerState<CartProducts> {
               itemCount: widget.displayProducts.length,
               itemBuilder: (context, index) {
                 return CartCard(
-                    product: widget.displayProducts[index],
-                    onDelete: () {
-                      setState(() {
-                        ref
-                            .read(shopProvider.notifier)
-                            .resetStock(widget.displayProducts[index]);
-                        ref
-                            .read(cartProvider.notifier)
-                            .delete(widget.displayProducts[index]);
-                      });
+                  product: widget.displayProducts[index],
+                  onDelete: () {
+                    setState(() {
+                      ref.read(deleteToCart(widget.displayProducts[index]));
                     });
+                  },
+                );
               },
             ),
           ),

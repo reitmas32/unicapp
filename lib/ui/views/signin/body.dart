@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/providers/providers.dart';
 
 class SignInBody extends ConsumerWidget {

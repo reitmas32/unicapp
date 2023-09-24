@@ -28,7 +28,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final displayProducts = ref.watch(filterCartProvider(lable));
-    final cart = ref.watch(cartProvider);
+    final int len = ref.watch(getTotalProducts);
     return Scaffold(
       floatingActionButton: size.width < 750
           ? Stack(
@@ -43,7 +43,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     color: Colors.white,
                   ),
                 ),
-                if (false)
+                if (len != 0)
                   Positioned(
                     top: 0,
                     right: 0,
@@ -63,10 +63,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                           );
                         },
                         child: Text(
-                          totalProducts(cart).toString(),
-                          key: ValueKey<int>(
-                              5), // Identificar el widget para la animación
-                          style: TextStyle(
+                          len.toString(), // Identificar el widget para la animación
+                          style: const TextStyle(
                             fontSize: 16,
                           ),
                         ),
@@ -103,14 +101,15 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
     );
   }
-}
 
-int totalProducts(List<Product> products) {
-  int total = 0;
-  for (var product in products) {
-    total += product.stock;
+  int totalProducts(List<Product> products) {
+    int total = 0;
+    for (var product in products) {
+      total += product.stock;
+    }
+    setState(() {});
+    return total;
   }
-  return total;
 }
 
 class ContentShop extends StatelessWidget {
@@ -120,8 +119,6 @@ class ContentShop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return ShopProducts(
       displayProducts: displayProducts,
     );

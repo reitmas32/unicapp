@@ -23,23 +23,26 @@ class Cart extends StateNotifier<List<Product>> {
     if (constaint2List != -1) {
       // El producto ya está en el carrito, aumenta la cantidad en stock
       state[constaint2List].stock++;
+      state = [...state];
     } else {
       // Nuevo Producto
 
-      state.add(Product(
-        id: product.id,
-        name: product.name,
-        stock: 1,
-        code: product.code,
-        image: product.image,
-        salePrice: product.salePrice,
-        purchasePrice: product.purchasePrice,
-        product: product.product,
-        quantity: product.quantity,
-        selected: product.selected,
-      ));
+      state = [
+        ...state,
+        Product(
+          id: product.id,
+          name: product.name,
+          stock: 1,
+          code: product.code,
+          image: product.image,
+          salePrice: product.salePrice,
+          purchasePrice: product.purchasePrice,
+          product: product.product,
+          quantity: product.quantity,
+          selected: product.selected,
+        )
+      ];
     }
-
     return true;
   }
 
@@ -52,6 +55,7 @@ class Cart extends StateNotifier<List<Product>> {
       } else {
         state.removeWhere((element) => element.id == product.id);
       }
+      state = [...state];
     }
 
     return true;
@@ -81,6 +85,10 @@ class Cart extends StateNotifier<List<Product>> {
     var responseCreateBuy = await yonestoAPI.createBuy(buyRequest);
     return responseCreateBuy.success;
   }
+
+  int getTotalProducts() {
+    return state.length;
+  }
 }
 
 final cartProvider = StateNotifierProvider<Cart, List<Product>>((ref) {
@@ -92,5 +100,19 @@ final createBuy = FutureProvider.family
   final shopProducts = await ref
       .watch(cartProvider.notifier)
       .createBuy(buyRequest.clientCode, buyRequest.payment);
-  return true;
+  return shopProducts;
+});
+
+final getTotalProducts = Provider.autoDispose<int>((ref) {
+  final cart = ref.watch(cartProvider);
+  int len = 0;
+  for (var p in cart) {
+    len += p.stock;
+  }
+  return len;
+});
+
+final deleteToCart = Provider.family<void, Product>((ref, product) {
+  ref.read(shopProvider.notifier).resetStock(product);
+  ref.read(cartProvider.notifier).delete(product);
 });

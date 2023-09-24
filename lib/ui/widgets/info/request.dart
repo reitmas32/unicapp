@@ -58,10 +58,10 @@ class SuccessRequest extends StatelessWidget {
 class ErrorRequest extends StatelessWidget {
   const ErrorRequest({
     super.key,
-    this.lable,
+    this.lable = '',
   });
 
-  final lable;
+  final String lable;
 
   @override
   Widget build(BuildContext context) {

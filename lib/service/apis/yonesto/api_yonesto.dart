@@ -1,16 +1,11 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:yonesto_ui/domain/models/proccess_response/proccess_response.dart';
-import 'package:yonesto_ui/domain/models/product/product.dart';
 import 'package:yonesto_ui/domain/models/product/product_getway.dart';
 import 'package:yonesto_ui/models/buy_request.dart';
-import 'package:yonesto_ui/models/pay_debts_response.dart';
 import 'package:yonesto_ui/models/product_response.dart';
-import 'package:yonesto_ui/models/unpaid_buy_response.dart';
 import 'package:yonesto_ui/service/apis/yonesto/base.dart';
-import 'package:yonesto_ui/service/data_static.dart';
 
 class YonestoAPI extends ProductsAPI {
   final Map<String, String> headers = {
@@ -28,7 +23,7 @@ class YonestoAPI extends ProductsAPI {
     );
     try {
       final response = await http.post(
-        Uri.parse('${YonestoBase.url}/buy/create/'),
+        Uri.parse('${yonestoBase.url}/buy/create/'),
         body: jsonEncode(buyRequest.toJson()),
         headers: headers,
       );
@@ -53,7 +48,7 @@ class YonestoAPI extends ProductsAPI {
     );
     try {
       final response = await http.get(
-        Uri.parse('${YonestoBase.url}/users/unpaid-buys/$code'),
+        Uri.parse('${yonestoBase.url}/users/unpaid-buys/$code'),
         headers: headers,
       );
       Map<String, dynamic> responseData = jsonDecode(response.body);
@@ -80,7 +75,7 @@ class YonestoAPI extends ProductsAPI {
     );
     try {
       // Make Request
-      var uri = Uri.parse('${YonestoBase.url}/product/info');
+      var uri = Uri.parse('${yonestoBase.url}/product/info');
       var response = await http.get(uri);
 
       // Check Status Code
@@ -94,8 +89,6 @@ class YonestoAPI extends ProductsAPI {
         responsesProccess.success = productsResponse.success;
         responsesProccess.code = response.statusCode;
         responsesProccess.data = productsResponse.data;
-
-        storage.saveCode('10064');
       }
     } on Exception catch (e) {
       responsesProccess.data = e.toString();
@@ -112,7 +105,7 @@ class YonestoAPI extends ProductsAPI {
     );
     try {
       final response = await http.post(
-        Uri.parse('${YonestoBase.url}/users/pay-buys'),
+        Uri.parse('${yonestoBase.url}/users/pay-buys'),
         body: jsonEncode({
           'code': code,
           'payment': pay,

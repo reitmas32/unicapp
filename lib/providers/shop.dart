@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
@@ -36,8 +37,10 @@ class Shop extends StateNotifier<List<Product>> {
   bool incrementStock(Product product) {
     Product originalProduct =
         originalShop.where((element) => element.id == product.id).first;
-    print('Original Stock: ${originalProduct.stock}');
-    print('Current Stock: ${product.stock}');
+    if (kDebugMode) {
+      print('Original Stock: ${originalProduct.stock}');
+      print('Current Stock: ${product.stock}');
+    }
 
     if (product.stock < originalProduct.stock) {
       int productShopIndex = state.indexWhere((item) => item.id == product.id);
@@ -49,6 +52,9 @@ class Shop extends StateNotifier<List<Product>> {
 
   bool decrementStock(Product product) {
     int productShopIndex = state.indexWhere((item) => item.id == product.id);
+    if (state[productShopIndex].stock == 0) {
+      return false;
+    }
     state[productShopIndex].stock--;
     return true;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yonesto_ui/ui/atoms/package.dart';
 
 class UpdateCartButton extends StatelessWidget {
   const UpdateCartButton({
@@ -23,7 +24,7 @@ class UpdateCartButton extends StatelessWidget {
         child: Container(
           width: size.width > 750 ? 40 : 25,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
+            borderRadius: BordersRadius.br100,
             color: avalible
                 ? Colors.purple
                 : const Color.fromARGB(255, 101, 69, 107),

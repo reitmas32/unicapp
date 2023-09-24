@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:unihacks_ui_kit/buttons/action_button.dart';
 import 'package:unihacks_ui_kit/text_fields/multiple_textfields.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';

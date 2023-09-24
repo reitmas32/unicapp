@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
-import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
-import 'package:yonesto_ui/providers/cart.dart';
 import 'package:yonesto_ui/providers/providers.dart';
-import 'package:yonesto_ui/ui/widgets/buttons/update_cart.dart';
+import 'package:yonesto_ui/ui/molecules/package.dart';
 
 class ShoppingCard extends ConsumerStatefulWidget {
   ShoppingCard({
@@ -106,7 +103,10 @@ class ShoppingCardState extends ConsumerState<ShoppingCard> {
   void addToCart() {
     setState(() {
       final shop = ref.read(shopProvider.notifier);
-      ref.read(shopProvider.notifier).decrementStock(widget.product);
+      final res =
+          ref.read(shopProvider.notifier).decrementStock(widget.product);
+      if (!res) return;
+      // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
       ref.read(cartProvider.notifier).add(shop.state, widget.product);
     });
   }

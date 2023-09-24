@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
 import 'package:yonesto_ui/providers/providers.dart';
+import 'package:yonesto_ui/ui/atoms/package.dart';
+import 'package:yonesto_ui/ui/molecules/buttons/delete_cart.dart';
 
 class CartCard extends ConsumerStatefulWidget {
   CartCard({
@@ -23,17 +25,15 @@ class CartCardState extends ConsumerState<CartCard> {
   Widget build(BuildContext context) {
     final isDarkMode = ref.watch(isDarkModeProvider);
     return Card(
-      color: isDarkMode
-          ? const Color.fromARGB(255, 35, 34, 34)
-          : const Color.fromARGB(255, 199, 197, 197),
+      color: isDarkMode ? CustomColors.cardBgDark : CustomColors.cardBgLight,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: Paddings.p200,
         child: SizedBox(
           height: 100,
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: Paddings.p200,
                 child: Image.network(
                   'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
                   height: 150,
@@ -42,7 +42,7 @@ class CartCardState extends ConsumerState<CartCard> {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: Paddings.pVertical200,
                     child: Text(
                       widget.product.name,
                       maxLines: 1,
@@ -74,28 +74,10 @@ class CartCardState extends ConsumerState<CartCard> {
                 ],
               ),
               const Spacer(),
-              InkWell(
+              DeleteCartButton(
                 onTap: () {
                   widget.onDelete();
-                  var snackBar = SnackBar(
-                    content: Text(
-                      '¡Se Eliminaron todos los ${widget.product.name} del Carrito!',
-                      style: TextStyle(
-                        color: isDarkMode
-                            ? const Color.fromARGB(255, 199, 197, 197)
-                            : const Color.fromARGB(255, 35, 34, 34),
-                      ),
-                    ),
-                    duration: const Duration(milliseconds: 750),
-                    backgroundColor: isDarkMode
-                        ? const Color.fromARGB(255, 35, 34, 34)
-                        : const Color.fromARGB(
-                            255, 199, 197, 197), // Duración de la visibilidad
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
-                child: const Icon(Icons.delete),
               )
             ],
           ),
