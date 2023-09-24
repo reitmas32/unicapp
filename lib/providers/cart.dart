@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yonesto_ui/domain/models/product/product.dart';
-import 'package:yonesto_ui/models/buy_request.dart';
-import 'package:yonesto_ui/models/product_request.dart';
-import 'package:yonesto_ui/providers/shop.dart';
-import 'package:yonesto_ui/service/apis/api_conection.dart';
-import 'package:yonesto_ui/tools/tools.dart';
+import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/models/buy_request.dart';
+import 'package:unicapp/models/product_request.dart';
+import 'package:unicapp/providers/shop.dart';
+import 'package:unicapp/service/apis/api_conection.dart';
+import 'package:unicapp/tools/tools.dart';
 
 class Cart extends StateNotifier<List<Product>> {
   // We initialize the list of todos to an empty list

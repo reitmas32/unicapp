@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_loading_animation_kit/flutter_loading_animation_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yonesto_ui/providers/providers.dart';
-import 'package:yonesto_ui/ui/views/common/drawer.dart';
-import 'package:yonesto_ui/domain/models/product/product.dart';
+import 'package:unicapp/providers/providers.dart';
+import 'package:unicapp/ui/views/common/drawer.dart';
+import 'package:unicapp/domain/models/product/product.dart';
 
-import 'package:yonesto_ui/ui/views/yonesto/shop_products.dart';
-import 'package:yonesto_ui/ui/views/common/app_bar.dart';
-import 'package:yonesto_ui/ui/widgets/molecules/appbar.dart';
+import 'package:unicapp/ui/views/yonesto/shop_products.dart';
+import 'package:unicapp/ui/views/common/app_bar.dart';
+import 'package:unicapp/ui/widgets/molecules/appbar.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

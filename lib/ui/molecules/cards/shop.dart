@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yonesto_ui/domain/models/product/product.dart';
-import 'package:yonesto_ui/providers/providers.dart';
-import 'package:yonesto_ui/ui/molecules/package.dart';
+import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/providers/providers.dart';
+import 'package:unicapp/ui/molecules/package.dart';
 
 class ShoppingCard extends ConsumerStatefulWidget {
   ShoppingCard({

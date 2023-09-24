@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yonesto_ui/domain/models/product/product.dart';
-import 'package:yonesto_ui/ui/molecules/package.dart';
+import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/ui/molecules/package.dart';
 
 class ShopProducts extends StatelessWidget {
   const ShopProducts({super.key, required this.displayProducts});

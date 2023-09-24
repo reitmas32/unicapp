@@ -1,4 +1,4 @@
-import 'package:yonesto_ui/domain/models/product/product.dart';
+import 'package:unicapp/domain/models/product/product.dart';
 
 class ProductsResponse {
   bool success;

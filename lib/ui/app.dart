@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yonesto_ui/ui/yonesto.dart';
+import 'package:unicapp/ui/yonesto.dart';
 
 class YonestoApp extends StatefulWidget {
   const YonestoApp({super.key});

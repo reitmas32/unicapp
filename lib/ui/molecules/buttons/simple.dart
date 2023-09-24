@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yonesto_ui/ui/atoms/package.dart';
+import 'package:unicapp/ui/atoms/package.dart';
 
 class SimpleButton extends StatefulWidget {
   const SimpleButton({super.key, required this.lable, this.onTap});

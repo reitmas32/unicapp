@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yonesto_ui/domain/models/product/product.dart';
-import 'package:yonesto_ui/providers/cart.dart';
-import 'package:yonesto_ui/ui/views/yonesto/cart_products.dart';
-import 'package:yonesto_ui/ui/views/common/app_bar.dart';
+import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/providers/cart.dart';
+import 'package:unicapp/ui/views/yonesto/cart_products.dart';
+import 'package:unicapp/ui/views/common/app_bar.dart';
 
 class CartPage extends ConsumerStatefulWidget {
   const CartPage({super.key});

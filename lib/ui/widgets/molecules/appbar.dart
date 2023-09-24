@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yonesto_ui/providers/providers.dart';
+import 'package:unicapp/providers/providers.dart';
 
 class YonestoSearchBar extends ConsumerWidget {
   const YonestoSearchBar({super.key, this.onChanged});

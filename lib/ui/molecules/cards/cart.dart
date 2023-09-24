@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yonesto_ui/domain/models/product/product.dart';
-import 'package:yonesto_ui/providers/providers.dart';
-import 'package:yonesto_ui/ui/atoms/package.dart';
-import 'package:yonesto_ui/ui/molecules/buttons/delete_cart.dart';
+import 'package:unicapp/domain/models/product/product.dart';
+import 'package:unicapp/providers/providers.dart';
+import 'package:unicapp/ui/atoms/package.dart';
+import 'package:unicapp/ui/molecules/buttons/delete_cart.dart';
 
 class CartCard extends ConsumerStatefulWidget {
   CartCard({

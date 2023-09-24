@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:yonesto_ui/domain/models/proccess_response/proccess_response.dart';
-import 'package:yonesto_ui/domain/models/product/product_getway.dart';
-import 'package:yonesto_ui/models/buy_request.dart';
-import 'package:yonesto_ui/models/product_response.dart';
-import 'package:yonesto_ui/service/apis/yonesto/base.dart';
+import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
+import 'package:unicapp/domain/models/product/product_getway.dart';
+import 'package:unicapp/models/buy_request.dart';
+import 'package:unicapp/models/product_response.dart';
+import 'package:unicapp/service/apis/yonesto/base.dart';
 
 class YonestoAPI extends ProductsAPI {
   final Map<String, String> headers = {

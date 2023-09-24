@@ -1,4 +1,4 @@
-import 'package:yonesto_ui/domain/models/proccess_response/proccess_response.dart';
+import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
 
 abstract class UserStorage {
   Future<ProccessResponce> saveJWT(String jwt);

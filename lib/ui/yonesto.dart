@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yonesto_ui/providers/providers.dart';
-import 'package:yonesto_ui/ui/pages/cart.dart';
-import 'package:yonesto_ui/ui/pages/error.dart';
-import 'package:yonesto_ui/ui/pages/home.dart';
-import 'package:yonesto_ui/ui/pages/sigin.dart';
+import 'package:unicapp/providers/providers.dart';
+import 'package:unicapp/ui/pages/cart.dart';
+import 'package:unicapp/ui/pages/error.dart';
+import 'package:unicapp/ui/pages/home.dart';
+import 'package:unicapp/ui/pages/sigin.dart';
 
 CustomTransitionPage buildPageWithDefaultTransition<T>({
   required BuildContext context,
