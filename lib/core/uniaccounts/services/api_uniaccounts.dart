@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
 import 'package:unicapp/core/uniaccounts/models/user_getway.dart';
-import 'package:unicapp/models/signin_response.dart';
+import 'package:unicapp/core/uniaccounts/models/signin_response.dart';
 import 'package:unicapp/core/uniaccounts/models/user.dart';
 import 'package:unicapp/core/api_conection.dart';
 import 'package:unicapp/core/uniaccounts/services/base.dart';
