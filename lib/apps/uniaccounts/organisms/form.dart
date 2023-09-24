@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:unicapp/apps/uniaccounts/molecules/accounts_textfields.dart';
+import 'package:unicapp/apps/uniaccounts/molecules/aditional_options.dart';
+import 'package:unicapp/apps/uniaccounts/molecules/sign_options.dart';
 import 'package:unicapp/domain/models/proccess_response/proccess_response.dart';
 import 'package:unicapp/core/uniaccounts/models/user.dart';
-import 'package:unicapp/providers/theme.dart';
 import 'package:unicapp/core/api_conection.dart';
-import 'package:unicapp/ui/molecules/package.dart';
-import 'package:unicapp/ui/widgets/input/minimalist_text_filed.dart';
 
 class SignInForm extends ConsumerStatefulWidget {
   const SignInForm({super.key});
@@ -23,7 +22,6 @@ class _SignInFormState extends ConsumerState<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = ref.watch(isDarkModeProvider);
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -35,64 +33,13 @@ class _SignInFormState extends ConsumerState<SignInForm> {
       ),
       child: Column(
         children: [
-          MinimalistTextField(
-            lable: 'User Name',
-            controller: userNameController,
+          AccountsTextFieds(
+            userNameController: userNameController,
+            passwordController: passwordController,
           ),
-          MinimalistTextField(
-            lable: 'Password',
-            isPassword: true,
-            controller: passwordController,
-          ),
-          if (size.width > 700)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const RememberMe(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 25.0,
-                  ),
-                  child: Text(
-                    'Forgot Password',
-                    style: GoogleFonts.roboto(
-                      fontWeight:
-                          isDarkMode ? FontWeight.w200 : FontWeight.w300,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          if (size.width < 700) const RememberMe(),
-          if (size.width < 700)
-            const SizedBox(
-              height: 20,
-            ),
-          if (size.width < 700)
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 25.0,
-              ),
-              child: Text(
-                'Forgot Password',
-                style: GoogleFonts.roboto(
-                  fontWeight: isDarkMode ? FontWeight.w200 : FontWeight.w300,
-                  fontSize: 15,
-                ),
-              ),
-            ),
-          const SizedBox(
-            height: 100,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 100,
-            ),
-            child: SimpleButton(
-              lable: 'Sign Out',
-              onTap: singIn,
-            ),
+          const AditionalOptions(),
+          SignOptions(
+            signIn: singIn,
           ),
           const SizedBox(
             height: 15,
@@ -155,49 +102,5 @@ class _SignInFormState extends ConsumerState<SignInForm> {
       // ignore: use_build_context_synchronously
       context.go('/home');
     }
-  }
-}
-
-class RememberMe extends ConsumerStatefulWidget {
-  const RememberMe({
-    super.key,
-  });
-
-  @override
-  ConsumerState<RememberMe> createState() => _RememberMeState();
-}
-
-class _RememberMeState extends ConsumerState<RememberMe> {
-  bool remember = false;
-  @override
-  Widget build(BuildContext context) {
-    final isDarkMode = ref.watch(isDarkModeProvider);
-
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15.0,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Checkbox(
-            value: remember,
-            activeColor: Colors.purple,
-            onChanged: (value) {
-              setState(() {
-                remember = value ?? false;
-              });
-            },
-          ),
-          Text(
-            'Remember me',
-            style: GoogleFonts.roboto(
-              fontWeight: isDarkMode ? FontWeight.w200 : FontWeight.w300,
-              fontSize: 15,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }
