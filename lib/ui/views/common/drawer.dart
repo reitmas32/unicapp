@@ -104,9 +104,10 @@ class _PayDebtsState extends State<PayDebts> {
 
   loadUnpaidBuys() async {
     initProccessGetUnpaidsBuys = true;
+    var code = int.parse((await yonestoAPI.storage.loadCode()).data);
 
     var response = await yonestoAPI.getDebts(
-      10064,
+      code,
     );
 
     responseSuccessGetUnpaidsBuys = response.success;
@@ -128,8 +129,10 @@ class _PayDebtsState extends State<PayDebts> {
     // ignore: use_build_context_synchronously
     setState(() {});
 
+    var code = int.parse((await yonestoAPI.storage.loadCode()).data);
+
     var responseSuccess =
-        await yonestoAPI.payDebts(10064, double.parse(payment));
+        await yonestoAPI.payDebts(code, double.parse(payment));
     setState(() {
       responseSuccessPayBuys = responseSuccess.success;
     });
