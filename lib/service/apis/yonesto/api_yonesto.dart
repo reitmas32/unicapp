@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:unicapp/shared/models/proccess_response.dart';
-import 'package:unicapp/domain/models/product/product_getway.dart';
+import 'package:unicapp/core/yonesto/models/product_getway.dart';
 import 'package:unicapp/models/buy_request.dart';
 import 'package:unicapp/models/product_response.dart';
 import 'package:unicapp/service/apis/yonesto/base.dart';
 
-class YonestoAPI extends ProductsAPI {
+class YonestoAPI extends YonestoAPIGetWay {
   final Map<String, String> headers = {
     'Content-Type': 'application/json',
     'Authorization': 'Token ${dotenv.env['YONESTO_API_KEY']}',
