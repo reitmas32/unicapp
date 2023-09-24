@@ -5,7 +5,7 @@ import 'package:unicapp/providers/providers.dart';
 import 'package:unicapp/ui/pages/cart.dart';
 import 'package:unicapp/ui/pages/error.dart';
 import 'package:unicapp/ui/pages/home.dart';
-import 'package:unicapp/ui/pages/sigin.dart';
+import 'package:unicapp/apps/uniaccounts/pages/sigin.dart';
 
 CustomTransitionPage buildPageWithDefaultTransition<T>({
   required BuildContext context,
