@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unicapp/domain/models/product/product.dart';
-import 'package:unicapp/service/apis/api_conection.dart';
+import 'package:unicapp/core/uniaccounts/services/api_conection.dart';
 
 class Shop extends StateNotifier<List<Product>> {
   // We initialize the list of todos to an empty list
