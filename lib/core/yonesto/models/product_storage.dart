@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:unicapp/shared/models/proccess_response.dart';
-import 'package:unicapp/core/yonesto/models/yonesto_storage.dart';
+import 'package:unicapp/core/yonesto/models/yonesto_storage_interface.dart';
 
 class ProductStorageSecurityStorage extends YonestoStorage {
   final storageConection = const FlutterSecureStorage();
