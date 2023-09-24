@@ -5,7 +5,7 @@ import 'package:unicapp/shared/models/proccess_response.dart';
 import 'package:unicapp/core/yonesto/models/yonesto_getway.dart';
 import 'package:unicapp/models/buy_request.dart';
 import 'package:unicapp/models/product_response.dart';
-import 'package:unicapp/service/apis/yonesto/base.dart';
+import 'package:unicapp/core/yonesto/services/base.dart';
 
 class YonestoAPI extends YonestoAPIGetWay {
   final Map<String, String> headers = {

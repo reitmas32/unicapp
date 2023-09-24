@@ -83,6 +83,9 @@ class Cart extends StateNotifier<List<Product>> {
             .toList());
 
     var responseCreateBuy = await yonestoAPI.createBuy(buyRequest);
+    if (responseCreateBuy.success) {
+      state = [];
+    }
     return responseCreateBuy.success;
   }
 
