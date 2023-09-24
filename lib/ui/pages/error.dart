@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unihacks_ui_kit/buttons/theme_swtcher.dart';
 
 class ErrorPage extends StatefulWidget {
   const ErrorPage({super.key});
@@ -23,7 +22,6 @@ class _ErrorPageState extends State<ErrorPage> {
       appBar: AppBar(
         title: const Center(child: Text('Yonesto')),
         backgroundColor: Theme.of(context).colorScheme.primary,
-        actions: const [ThemeSwitcher()],
       ),
       body: SingleChildScrollView(
         child: Column(

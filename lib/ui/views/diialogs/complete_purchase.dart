@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unihacks_ui_kit/buttons/action_button.dart';
-import 'package:unihacks_ui_kit/text_fields/multiple_textfields.dart';
 import 'package:yonesto_ui/domain/models/product/product.dart';
 import 'package:yonesto_ui/models/buy_request.dart';
 import 'package:yonesto_ui/models/product_request.dart';
 import 'package:yonesto_ui/providers/providers.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/service/data_static.dart';
+import 'package:yonesto_ui/ui/molecules/package.dart';
 import 'package:yonesto_ui/ui/widgets/info/request.dart';
+import 'package:yonesto_ui/ui/widgets/input/minimalist_text_filed.dart';
 
 class CompletePurchaseDialog extends ConsumerStatefulWidget {
   const CompletePurchaseDialog({super.key, required this.cart});
@@ -79,22 +79,18 @@ class _CompletePurchaseDialogState
       errorLable: 'Error al generar tu Compra',
       actions: <Widget>[
         if (!initProccessBuy)
-          ActionButton(
+          SimpleButton(
             onTap: () async {
               createBuy();
             },
             lable: 'Finalizar',
-            color: Colors.purple,
           ),
       ],
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          MultipleTextField(
+          MinimalistTextField(
             lable: 'Cuanto Pagaras',
-            padding: const EdgeInsets.symmetric(
-              vertical: 15.0,
-            ),
             onlyNumbers: true,
             onChanged: (text) {
               setState(() {
@@ -105,7 +101,7 @@ class _CompletePurchaseDialogState
                 }
               });
             },
-            textEditingController: paymentController,
+            controller: paymentController,
           ),
           Text(
               'Tu deuda Aumentara en: ${calculateTotal(cart) - double.parse(payment)}'),

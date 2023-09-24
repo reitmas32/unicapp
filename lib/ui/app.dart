@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unihacks_ui_kit/themes/theme_provider.dart';
 import 'package:yonesto_ui/ui/yonesto.dart';
 
 class YonestoApp extends StatefulWidget {
@@ -10,11 +9,8 @@ class YonestoApp extends StatefulWidget {
 }
 
 class _YonestoAppState extends State<YonestoApp> {
-  ThemeProvider themeProvider = ThemeProvider();
-
   @override
   void initState() {
-    getCurrentAppTheme(themeProvider);
     super.initState();
   }
 

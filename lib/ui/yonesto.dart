@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unihacks_ui_kit/themes/themes.dart';
 import 'package:yonesto_ui/providers/providers.dart';
 import 'package:yonesto_ui/ui/pages/cart.dart';
 import 'package:yonesto_ui/ui/pages/error.dart';

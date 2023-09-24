@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:unihacks_ui_kit/buttons/action_button.dart';
-import 'package:unihacks_ui_kit/text_fields/multiple_textfields.dart';
 import 'package:yonesto_ui/service/apis/api_conection.dart';
 import 'package:yonesto_ui/service/data_static.dart';
 import 'package:yonesto_ui/ui/molecules/package.dart';
 import 'package:yonesto_ui/ui/widgets/info/request.dart';
+import 'package:yonesto_ui/ui/widgets/input/minimalist_text_filed.dart';
 
 class YonestoDrawer extends StatelessWidget {
   const YonestoDrawer({
@@ -155,22 +154,17 @@ class _PayDebtsState extends State<PayDebts> {
             responseSuccess: responseSuccessPayBuys,
             actions: <Widget>[
               if (!detachProcessPay)
-                ActionButton(
-                  onTap: () async {
-                    createPay();
-                  },
-                  lable: 'Pagar',
-                  color: Colors.purple,
-                ),
+                SimpleButton(
+                    onTap: () async {
+                      createPay();
+                    },
+                    lable: 'Pagar'),
             ],
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                MultipleTextField(
+                MinimalistTextField(
                   lable: 'Cuanto Pagaras',
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15.0,
-                  ),
                   onlyNumbers: true,
                   onChanged: (text) {
                     setState(() {
@@ -181,7 +175,7 @@ class _PayDebtsState extends State<PayDebts> {
                       }
                     });
                   },
-                  textEditingController: paymentController,
+                  controller: paymentController,
                 ),
                 Text(
                   'Tu deuda es: ${totalRemainingAmount - double.parse(payment)}',

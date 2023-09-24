@@ -6,11 +6,15 @@ class MinimalistTextField extends StatefulWidget {
     required this.lable,
     this.controller,
     this.isPassword = false,
+    this.onChanged,
+    this.onlyNumbers = false,
   });
 
   final String lable;
   final TextEditingController? controller;
   final bool isPassword;
+  final ValueChanged<String>? onChanged;
+  final bool onlyNumbers;
 
   @override
   State<MinimalistTextField> createState() => _MinimalistTextFieldState();
@@ -34,6 +38,8 @@ class _MinimalistTextFieldState extends State<MinimalistTextField> {
       child: TextFormField(
         controller: widget.controller,
         obscureText: _obscureText,
+        onChanged: widget.onChanged,
+        keyboardType: widget.onlyNumbers ? TextInputType.number : null,
         decoration: InputDecoration(
           labelText: widget.lable,
           contentPadding:
