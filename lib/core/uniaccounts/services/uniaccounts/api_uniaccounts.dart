@@ -6,7 +6,7 @@ import 'package:unicapp/core/uniaccounts/models/user_getway.dart';
 import 'package:unicapp/models/signin_response.dart';
 import 'package:unicapp/core/uniaccounts/models/user.dart';
 import 'package:unicapp/service/apis/api_conection.dart';
-import 'package:unicapp/service/apis/uniaccounts/base.dart';
+import 'package:unicapp/core/uniaccounts/services/uniaccounts/base.dart';
 
 class AccountAPI extends AccontsUserAPI {
   final Map<String, String> headers = {
