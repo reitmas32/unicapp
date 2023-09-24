@@ -1,6 +1,6 @@
 import 'package:unicapp/shared/models/proccess_response.dart';
 import 'package:unicapp/core/yonesto/models/yonesto_storage_interface.dart';
-import 'package:unicapp/models/buy_request.dart';
+import 'package:unicapp/core/yonesto/models/buy_request.dart';
 
 abstract class YonestoAPIGetWay {
   final YonestoStorage storage;

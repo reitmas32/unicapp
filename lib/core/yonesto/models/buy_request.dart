@@ -1,4 +1,4 @@
-import 'package:unicapp/models/product_request.dart';
+import 'package:unicapp/core/yonesto/models/product_request.dart';
 
 class BuyRequest {
   int clientCode;
