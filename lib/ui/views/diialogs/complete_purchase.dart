@@ -80,9 +80,11 @@ class _CompletePurchaseDialogState
       actions: <Widget>[
         if (!initProccessBuy)
           SimpleButton(
-            onTap: () async {
-              createBuy();
-            },
+            onTap: calculateTotal(cart) - double.parse(payment) >= 0
+                ? () async {
+                    createBuy();
+                  }
+                : null,
             lable: 'Finalizar',
           ),
       ],
@@ -104,7 +106,7 @@ class _CompletePurchaseDialogState
             controller: paymentController,
           ),
           Text(
-              'Tu deuda Aumentara en: ${calculateTotal(cart) - double.parse(payment)}'),
+              'Tu deuda Aumentara en: ${(calculateTotal(cart) - double.parse(payment)).toStringAsFixed(2)}'),
         ],
       ),
     );

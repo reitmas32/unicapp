@@ -153,7 +153,7 @@ class _PayDebtsState extends State<PayDebts> {
             detachProccess: detachProcessPay,
             responseSuccess: responseSuccessPayBuys,
             actions: <Widget>[
-              if (!detachProcessPay)
+              if (!initProcessPay)
                 SimpleButton(
                     onTap: () async {
                       createPay();

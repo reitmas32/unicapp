@@ -43,7 +43,8 @@ class ShoppingCardState extends ConsumerState<ShoppingCard> {
           children: [
             Center(
               child: Image.network(
-                'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
+                //'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
+                widget.product.image,
                 height: 60,
               ),
             ),
