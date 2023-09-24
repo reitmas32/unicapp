@@ -4,7 +4,7 @@ import 'package:unicapp/models/buy_request.dart';
 import 'package:unicapp/models/product_request.dart';
 import 'package:unicapp/providers/shop.dart';
 import 'package:unicapp/core/api_conection.dart';
-import 'package:unicapp/tools/tools.dart';
+import 'package:unicapp/shared/tools/tools.dart';
 
 class Cart extends StateNotifier<List<Product>> {
   // We initialize the list of todos to an empty list
