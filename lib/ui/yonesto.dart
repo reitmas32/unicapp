@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicapp/apps/yonesto/providers/providers.dart';
+import 'package:unicapp/ui/common/atoms/custom_debug_banner.dart';
 import 'package:unicapp/ui/pages/cart.dart';
 import 'package:unicapp/ui/pages/error.dart';
 import 'package:unicapp/ui/pages/home.dart';
@@ -34,24 +35,25 @@ class _YonestoState extends ConsumerState<Yonesto> {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => const SingInPage(),
+        builder: (context, state) =>
+            const CustomDebugBanner(child: SingInPage()),
       ),
       GoRoute(
         path: "/home",
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) => const CustomDebugBanner(child: HomePage()),
         pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
           context: context,
           state: state,
-          child: const HomePage(),
+          child: const CustomDebugBanner(child: HomePage()),
         ),
       ),
       GoRoute(
         path: "/cart",
-        builder: (context, state) => const CartPage(),
+        builder: (context, state) => const CustomDebugBanner(child: CartPage()),
         pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
           context: context,
           state: state,
-          child: const CartPage(),
+          child: const CustomDebugBanner(child: CartPage()),
         ),
       ),
     ],
