@@ -48,6 +48,7 @@ class _CartPageState extends ConsumerState<CartPage> {
 
     return Scaffold(
       appBar: MinimalistAppBar(
+        title: 'My Cart',
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,

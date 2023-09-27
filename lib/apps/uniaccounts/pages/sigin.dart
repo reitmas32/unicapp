@@ -31,7 +31,7 @@ class _SingInPageState extends State<SingInPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: MinimalistAppBar(),
+      appBar: MinimalistAppBar(title: 'SignIn'),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
