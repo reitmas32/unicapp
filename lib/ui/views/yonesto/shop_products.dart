@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unicapp/core/yonesto/models/product.dart';
 import 'package:unicapp/ui/molecules/package.dart';
+import 'package:unicapp/ui/views/diialogs/info.dart';
 
 class ShopProducts extends StatelessWidget {
   const ShopProducts({super.key, required this.displayProducts});
@@ -25,9 +26,21 @@ class ShopProducts extends StatelessWidget {
                   children: List.generate(
                     displayProducts.length,
                     (index) {
-                      return ShoppingCard(
-                        index: index,
-                        product: displayProducts[index],
+                      return InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return InfoProductAlertDialog(
+                                  product: displayProducts[index],
+                                  index: index,
+                                );
+                              });
+                        },
+                        child: ShoppingCard(
+                          index: index,
+                          product: displayProducts[index],
+                        ),
                       );
                     },
                   ),
