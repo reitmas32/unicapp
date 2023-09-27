@@ -35,7 +35,7 @@ class CartCardState extends ConsumerState<CartCard> {
               Padding(
                 padding: Paddings.p200,
                 child: Image.network(
-                  widget.product.image,
+                  'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
                   height: 150,
                 ),
               ),
