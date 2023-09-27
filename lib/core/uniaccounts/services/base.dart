@@ -1,9 +1,10 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:unicapp/shared/config/envs.dart';
 
 class UniaccountsBase {
   static const version = 'v1';
-  String url =
-      '${dotenv.env['UNIACCONTS_URL_API']}/api/${UniaccountsBase.version}';
+  String url = '${ENVS.uniaccounts.url}/api/${UniaccountsBase.version}';
+  String apiKey = ENVS.uniaccounts.apiKey;
+  String serviceName = ENVS.uniaccounts.serviceName;
 }
 
 var uniaccountsBase = UniaccountsBase();

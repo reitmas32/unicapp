@@ -1,9 +1,9 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:unicapp/shared/config/envs.dart';
 
 class YonestoBase {
   static const version = 'v1';
-  String url =
-      '${dotenv.env['YONESTO_URL_API']}/api/${YonestoBase.version}/store';
+  String url = '${ENVS.yonesto.url}/api/${YonestoBase.version}/store';
+  String apiKey = ENVS.yonesto.apiKey;
 }
 
 var yonestoBase = YonestoBase();
