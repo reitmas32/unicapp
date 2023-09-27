@@ -10,6 +10,8 @@ import 'package:unicapp/ui/views/yonesto/shop_products.dart';
 import 'package:unicapp/ui/views/common/app_bar.dart';
 import 'package:unicapp/ui/widgets/molecules/appbar.dart';
 
+import 'dart:io' show Platform;
+
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
@@ -26,11 +28,10 @@ class _HomePageState extends ConsumerState<HomePage> {
   String lable = '';
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final displayProducts = ref.watch(filterCartProvider(lable));
     final int len = ref.watch(getTotalProducts);
     return Scaffold(
-      floatingActionButton: size.width < 750
+      floatingActionButton: !Platform.isWindows
           ? Stack(
               children: [
                 FloatingActionButton(
