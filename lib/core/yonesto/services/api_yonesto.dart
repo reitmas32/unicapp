@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:unicapp/shared/models/proccess_response.dart';
 import 'package:unicapp/core/yonesto/models/yonesto_getway.dart';
