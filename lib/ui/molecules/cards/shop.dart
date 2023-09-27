@@ -9,11 +9,17 @@ class ShoppingCard extends ConsumerStatefulWidget {
     super.key,
     required this.index,
     required this.product,
+    this.imageHeight,
+    this.height,
+    this.width,
   });
 
   final int index;
   final Product product;
   final List<bool> starStates = [true, true, true, false, false];
+  final double? imageHeight;
+  final double? height;
+  final double? width;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => ShoppingCardState();
@@ -34,8 +40,8 @@ class ShoppingCardState extends ConsumerState<ShoppingCard> {
       elevation: widget.product.stock == 0 ? 0 : 15.0,
       shadowColor: Colors.purple,
       child: Container(
-        width: size.width > 750 ? 200 : 120,
-        height: 200,
+        width: widget.width ?? (size.width > 750 ? 200 : 120),
+        height: widget.width ?? 200,
         padding: EdgeInsets.all(size.width > 750 ? 20 : 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +51,7 @@ class ShoppingCardState extends ConsumerState<ShoppingCard> {
               child: Image.network(
                 //'https://www.generaldistributionlc.com/cdn/shop/products/Sabritas-Chetos-Flaming-150gr.png?v=1558976038',
                 widget.product.image,
-                height: 60,
+                height: widget.imageHeight ?? 60,
               ),
             ),
             Padding(

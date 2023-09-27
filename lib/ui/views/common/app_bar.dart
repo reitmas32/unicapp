@@ -39,10 +39,11 @@ class _UNICappAppBarState extends State<UNICappAppBar> {
 class MinimalistAppBar extends StatefulWidget implements PreferredSizeWidget {
   const MinimalistAppBar({
     super.key,
-    this.leading,
+    this.leading, required this.title,
   });
 
   final Widget? leading;
+  final String title;
 
   @override
   State<MinimalistAppBar> createState() => _MinimalistAppBarState();
@@ -62,7 +63,7 @@ class _MinimalistAppBarState extends State<MinimalistAppBar> {
         children: [
           Center(
             child: Text(
-              'Sign In',
+              widget.title,
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w200,
                 fontSize: 25,

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:unicapp/shared/models/proccess_response.dart';
 import 'package:unicapp/core/yonesto/models/yonesto_getway.dart';
@@ -10,7 +9,7 @@ import 'package:unicapp/core/yonesto/services/base.dart';
 class YonestoAPI extends YonestoAPIGetWay {
   final Map<String, String> headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Token ${dotenv.env['YONESTO_API_KEY']}',
+    'Authorization': 'Token ${yonestoBase.apiKey}',
   };
   YonestoAPI({required super.storage});
 
@@ -41,6 +40,8 @@ class YonestoAPI extends YonestoAPIGetWay {
 
   @override
   Future<ProccessResponce> getDebts(int code) async {
+    print(yonestoBase.apiKey);
+    print(yonestoBase.url);
     var responsesProccess = ProccessResponce(
       success: false,
       data: [],
@@ -98,6 +99,8 @@ class YonestoAPI extends YonestoAPIGetWay {
 
   @override
   Future<ProccessResponce> payDebts(int code, double pay) async {
+    print(yonestoBase.apiKey);
+    print(yonestoBase.url);
     var responsesProccess = ProccessResponce(
       success: false,
       data: [],
