@@ -8,6 +8,7 @@ class MinimalistTextField extends StatefulWidget {
     this.isPassword = false,
     this.onChanged,
     this.onlyNumbers = false,
+    this.padding,
   });
 
   final String lable;
@@ -15,6 +16,7 @@ class MinimalistTextField extends StatefulWidget {
   final bool isPassword;
   final ValueChanged<String>? onChanged;
   final bool onlyNumbers;
+  final EdgeInsetsGeometry? padding;
 
   @override
   State<MinimalistTextField> createState() => _MinimalistTextFieldState();
@@ -32,12 +34,13 @@ class _MinimalistTextFieldState extends State<MinimalistTextField> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 50,
-        vertical: 15,
-      ),
+      padding: widget.padding ??
+          const EdgeInsets.symmetric(
+            horizontal: 50,
+            vertical: 15,
+          ),
       child: SizedBox(
-        width: size.width > 750 ? size.width / 3 : null ,
+        width: size.width > 750 ? size.width / 3 : null,
         child: TextFormField(
           controller: widget.controller,
           obscureText: _obscureText,
