@@ -94,6 +94,10 @@ class _CompletePurchaseDialogState
           MinimalistTextField(
             lable: 'Cuanto Pagaras',
             onlyNumbers: true,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 15,
+            ),
             onChanged: (text) {
               setState(() {
                 if (text == '') {
