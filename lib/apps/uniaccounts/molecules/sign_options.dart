@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unicapp/ui/molecules/buttons/simple.dart';
+
+import '../../yonesto/molecules/buttons/simple.dart';
 
 class SignOptions extends StatelessWidget {
   const SignOptions({super.key, this.signIn});

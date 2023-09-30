@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unicapp/ui/atoms/package.dart';
+import '../../atoms/package.dart';
 
 class UpdateCartButton extends StatelessWidget {
   const UpdateCartButton({

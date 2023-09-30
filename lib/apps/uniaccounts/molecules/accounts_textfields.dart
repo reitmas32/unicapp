@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unicapp/ui/widgets/input/minimalist_text_filed.dart';
+
+import '../../yonesto/widgets/input/minimalist_text_filed.dart';
 
 class AccountsTextFieds extends StatelessWidget {
   const AccountsTextFieds({

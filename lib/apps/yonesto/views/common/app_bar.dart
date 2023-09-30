@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:unicapp/ui/molecules/package.dart';
+import '../../molecules/package.dart';
 
 class UNICappAppBar extends StatefulWidget implements PreferredSizeWidget {
   const UNICappAppBar({

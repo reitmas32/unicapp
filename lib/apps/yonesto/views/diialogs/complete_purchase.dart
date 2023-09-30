@@ -7,9 +7,9 @@ import 'package:unicapp/core/yonesto/models/product_request.dart';
 import 'package:unicapp/apps/yonesto/providers/providers.dart';
 import 'package:unicapp/core/api_conection.dart';
 import 'package:unicapp/service/data_static.dart';
-import 'package:unicapp/ui/molecules/package.dart';
-import 'package:unicapp/ui/widgets/info/request.dart';
-import 'package:unicapp/ui/widgets/input/minimalist_text_filed.dart';
+import '../../molecules/package.dart';
+import '../..//widgets/info/request.dart';
+import '../../widgets/input/minimalist_text_filed.dart';
 
 class CompletePurchaseDialog extends ConsumerStatefulWidget {
   const CompletePurchaseDialog({super.key, required this.cart});

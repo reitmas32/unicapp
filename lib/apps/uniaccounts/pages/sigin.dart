@@ -4,7 +4,7 @@ import 'package:unicapp/core/api_conection.dart';
 import 'package:unicapp/apps/uniaccounts/organisms/body.dart';
 import 'package:unicapp/apps/uniaccounts/organisms/dont_account.dart';
 import 'package:unicapp/apps/uniaccounts/organisms/form.dart';
-import 'package:unicapp/ui/views/common/app_bar.dart';
+import '../../yonesto/views/common/app_bar.dart';
 
 class SingInPage extends StatefulWidget {
   const SingInPage({super.key});

@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unicapp/core/api_conection.dart';
 import 'package:unicapp/service/data_static.dart';
-import 'package:unicapp/ui/molecules/package.dart';
-import 'package:unicapp/ui/widgets/info/request.dart';
-import 'package:unicapp/ui/widgets/input/minimalist_text_filed.dart';
+import '../../molecules/package.dart';
+import '../../widgets/info/request.dart';
+import '../../widgets/input/minimalist_text_filed.dart';
 
 import 'dart:io' show Platform;
 

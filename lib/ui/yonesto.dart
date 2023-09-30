@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicapp/apps/yonesto/providers/providers.dart';
 import 'package:unicapp/ui/common/atoms/custom_debug_banner.dart';
-import 'package:unicapp/ui/pages/cart.dart';
-import 'package:unicapp/ui/pages/error.dart';
-import 'package:unicapp/ui/pages/home.dart';
+import 'package:unicapp/apps/yonesto/pages/cart.dart';
+import 'package:unicapp/apps/yonesto/pages/home.dart';
+import 'package:unicapp/apps/yonesto/pages/error.dart';
 import 'package:unicapp/apps/uniaccounts/pages/sigin.dart';
 
 CustomTransitionPage buildPageWithDefaultTransition<T>({
@@ -18,6 +18,26 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
     child: child,
     transitionsBuilder: (context, animation, secondaryAnimation, child) =>
         ScaleTransition(scale: animation, child: child),
+  );
+}
+
+CustomTransitionPage buildPageWithSlideTransition<T>({
+  required BuildContext context,
+  required GoRouterState state,
+  required Widget child,
+}) {
+  return CustomTransitionPage<T>(
+    key: state.pageKey,
+    child: child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const beginOffset = Offset(1.0, 0.0); // Comienza desde la derecha
+      const endOffset = Offset.zero; // Termina en la posición inicial
+      var tween = Tween<Offset>(begin: beginOffset, end: endOffset);
+
+      var offsetAnimation = animation.drive(tween);
+
+      return SlideTransition(position: offsetAnimation, child: child);
+    },
   );
 }
 
@@ -41,7 +61,7 @@ class _YonestoState extends ConsumerState<Yonesto> {
       GoRoute(
         path: "/home",
         builder: (context, state) => const CustomDebugBanner(child: HomePage()),
-        pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+        pageBuilder: (context, state) => buildPageWithSlideTransition<void>(
           context: context,
           state: state,
           child: const CustomDebugBanner(child: HomePage()),
@@ -50,7 +70,7 @@ class _YonestoState extends ConsumerState<Yonesto> {
       GoRoute(
         path: "/cart",
         builder: (context, state) => const CustomDebugBanner(child: CartPage()),
-        pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+        pageBuilder: (context, state) => buildPageWithSlideTransition<void>(
           context: context,
           state: state,
           child: const CustomDebugBanner(child: CartPage()),
