@@ -7,7 +7,7 @@ import '../views/common/drawer.dart';
 import 'package:unicapp/core/yonesto/models/product.dart';
 
 import '../views/yonesto/shop_products.dart';
-import '../views/common/app_bar.dart';
+import '../../../ui/common/molecules/app_bar.dart';
 import '../widgets/molecules/appbar.dart';
 
 import 'dart:io' show Platform;

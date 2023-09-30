@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:unicapp/core/yonesto/models/product.dart';
 import 'package:unicapp/apps/yonesto/providers/cart.dart';
 import '../views/yonesto/cart_products.dart';
-import '../views/common/app_bar.dart';
+import '../../../ui/common/molecules/app_bar.dart';
 
 class CartPage extends ConsumerStatefulWidget {
   const CartPage({super.key});
@@ -54,7 +54,7 @@ class _CartPageState extends ConsumerState<CartPage> {
             Icons.arrow_back,
           ),
           onPressed: () {
-            context.go('/home');
+            context.go('/yonesto/shop');
           },
         ),
       ),
