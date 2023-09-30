@@ -12,14 +12,14 @@ import '../widgets/molecules/appbar.dart';
 
 import 'dart:io' show Platform;
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
+class YonestoShopPage extends ConsumerStatefulWidget {
+  const YonestoShopPage({super.key});
 
   @override
-  ConsumerState<HomePage> createState() => _HomePageState();
+  ConsumerState<YonestoShopPage> createState() => _YonestoShopPageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _YonestoShopPageState extends ConsumerState<YonestoShopPage> {
   @override
   void initState() {
     super.initState();

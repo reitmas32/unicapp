@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:unicapp/apps/yonesto/providers/providers.dart';
 import 'package:unicapp/ui/common/atoms/custom_debug_banner.dart';
 import 'package:unicapp/apps/yonesto/pages/cart.dart';
-import 'package:unicapp/apps/yonesto/pages/home.dart';
-import 'package:unicapp/apps/yonesto/pages/error.dart';
+import 'package:unicapp/apps/yonesto/pages/yonesto_shop.dart';
+import 'package:unicapp/ui/common/pages/error.dart';
 import 'package:unicapp/apps/uniaccounts/pages/sigin.dart';
 
 CustomTransitionPage buildPageWithDefaultTransition<T>({
@@ -60,11 +60,12 @@ class _YonestoState extends ConsumerState<Yonesto> {
       ),
       GoRoute(
         path: "/home",
-        builder: (context, state) => const CustomDebugBanner(child: HomePage()),
+        builder: (context, state) =>
+            const CustomDebugBanner(child: YonestoShopPage()),
         pageBuilder: (context, state) => buildPageWithSlideTransition<void>(
           context: context,
           state: state,
-          child: const CustomDebugBanner(child: HomePage()),
+          child: const CustomDebugBanner(child: YonestoShopPage()),
         ),
       ),
       GoRoute(
