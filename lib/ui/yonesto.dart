@@ -7,6 +7,7 @@ import 'package:unicapp/apps/yonesto/pages/cart.dart';
 import 'package:unicapp/apps/yonesto/pages/yonesto_shop.dart';
 import 'package:unicapp/ui/common/pages/error.dart';
 import 'package:unicapp/apps/uniaccounts/pages/sigin.dart';
+import 'package:unicapp/ui/common/pages/home.dart';
 
 CustomTransitionPage buildPageWithDefaultTransition<T>({
   required BuildContext context,
@@ -59,13 +60,22 @@ class _YonestoState extends ConsumerState<Yonesto> {
             const CustomDebugBanner(child: SingInPage()),
       ),
       GoRoute(
-        path: "/home",
+        path: "/yonesto/shop",
         builder: (context, state) =>
             const CustomDebugBanner(child: YonestoShopPage()),
         pageBuilder: (context, state) => buildPageWithSlideTransition<void>(
           context: context,
           state: state,
           child: const CustomDebugBanner(child: YonestoShopPage()),
+        ),
+      ),
+      GoRoute(
+        path: "/home",
+        builder: (context, state) => const CustomDebugBanner(child: HomePage()),
+        pageBuilder: (context, state) => buildPageWithSlideTransition<void>(
+          context: context,
+          state: state,
+          child: const CustomDebugBanner(child: HomePage()),
         ),
       ),
       GoRoute(
