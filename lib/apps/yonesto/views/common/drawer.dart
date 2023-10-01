@@ -48,6 +48,18 @@ class YonestoDrawer extends StatelessWidget {
               },
             ),
           ),
+          const SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0),
+            child: SimpleButton(
+              lable: 'Home',
+              onTap: () {
+                context.go('/home');
+              },
+            ),
+          ),
           const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
