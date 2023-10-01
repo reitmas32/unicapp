@@ -63,7 +63,7 @@ class _CompletePurchaseDialogState
     // Cerrar el AlertDialog después de 2 segundos
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pop();
-      context.go('/home');
+      context.go('/yonesto/shop');
     });
   }
 
