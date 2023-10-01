@@ -6,9 +6,21 @@ class UNICappAppBar extends StatefulWidget implements PreferredSizeWidget {
   const UNICappAppBar({
     super.key,
     required this.title,
+    this.left,
+    this.top,
+    this.right,
+    this.bottom,
+    this.width,
+    this.height,
   });
 
   final Widget title;
+  final double? left;
+  final double? top;
+  final double? right;
+  final double? bottom;
+  final double? width;
+  final double? height;
 
   @override
   State<UNICappAppBar> createState() => _UNICappAppBarState();
@@ -24,15 +36,26 @@ class _UNICappAppBarState extends State<UNICappAppBar> {
 
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      title: widget.title,
-      titleSpacing: size.width > 750 ? 200 : 0,
-      leading: IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () {
-          Scaffold.of(context).openDrawer();
-          //context.go('/home');
-        },
+      title: Stack(
+        children: [
+          Center(child: widget.title),
+          Positioned(
+            left: widget.left,
+            top: widget.top,
+            right: widget.right,
+            bottom: widget.bottom,
+            child: IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+                //context.go('/home');
+              },
+            ),
+          )
+        ],
       ),
+      automaticallyImplyLeading: false,
+      titleSpacing: size.width > 750 ? 200 : 0,
     );
   }
 }
