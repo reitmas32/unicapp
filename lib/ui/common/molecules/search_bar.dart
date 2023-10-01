@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 library animation_search_bar;
 
 import 'package:flutter/cupertino.dart' show CupertinoPageRoute;
@@ -254,12 +256,12 @@ class KCustomButton extends StatelessWidget {
             child: InkWell(
                 splashColor: Theme.of(context).primaryColor.withOpacity(.2),
                 highlightColor: Theme.of(context).primaryColor.withOpacity(.05),
+                onTap: onPressed,
+                onLongPress: onLongPress,
                 child: Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                    child: widget),
-                onTap: onPressed,
-                onLongPress: onLongPress)));
+                    child: widget))));
   }
 }
 

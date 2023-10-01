@@ -40,8 +40,6 @@ class YonestoAPI extends YonestoAPIGetWay {
 
   @override
   Future<ProccessResponce> getDebts(int code) async {
-    print(yonestoBase.apiKey);
-    print(yonestoBase.url);
     var responsesProccess = ProccessResponce(
       success: false,
       data: [],
@@ -99,8 +97,6 @@ class YonestoAPI extends YonestoAPIGetWay {
 
   @override
   Future<ProccessResponce> payDebts(int code, double pay) async {
-    print(yonestoBase.apiKey);
-    print(yonestoBase.url);
     var responsesProccess = ProccessResponce(
       success: false,
       data: [],

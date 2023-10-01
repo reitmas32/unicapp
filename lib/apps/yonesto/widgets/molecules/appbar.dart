@@ -4,7 +4,7 @@ import 'package:unicapp/shared/providers/theme.dart';
 import 'package:unicapp/ui/common/molecules/search_bar.dart';
 
 class YonestoSearchBar extends ConsumerStatefulWidget {
-  YonestoSearchBar({super.key, required this.onChanged});
+  const YonestoSearchBar({super.key, required this.onChanged});
 
   final dynamic Function(String) onChanged;
 
