@@ -1,6 +1,6 @@
 {
-    "name": "yonesto_ui",
-    "short_name": "yonesto_ui",
+    "name": "unicapp",
+    "short_name": "unicapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
