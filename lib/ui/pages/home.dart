@@ -10,7 +10,7 @@ import 'package:unicapp/ui/views/yonesto/shop_products.dart';
 import 'package:unicapp/ui/views/common/app_bar.dart';
 import 'package:unicapp/ui/widgets/molecules/appbar.dart';
 
-import 'dart:io' show Platform;
+//import 'dart:io' show Platform;
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -31,8 +31,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final displayProducts = ref.watch(filterCartProvider(lable));
     final int len = ref.watch(getTotalProducts);
     return Scaffold(
-      floatingActionButton: !Platform.isWindows
-          ? Stack(
+      floatingActionButton: Stack(
               children: [
                 FloatingActionButton(
                   onPressed: () {
@@ -74,7 +73,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
               ],
             )
-          : null,
+          ,
       drawer: const YonestoDrawer(),
       appBar: UNICappAppBar(
         title: YonestoSearchBar(
