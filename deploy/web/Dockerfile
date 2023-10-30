@@ -4,6 +4,6 @@ COPY . .
 
 EXPOSE 5000
 
-COPY /etc/.env ./assets/.env
+COPY /etc/secrets/.env ./assets/.env
 
 CMD ["python", "app.py"]
