@@ -6,6 +6,6 @@ import 'package:unicapp/shared/config/envs.dart';
 
 void main() async {
   setPathUrlStrategy();
-  await ENVS.loadEnvs();
+  await ENVS.loadEnvs(fileName: '/etc/secrets/.env');
   runApp(const ProviderScope(child: YonestoApp()));
 }
