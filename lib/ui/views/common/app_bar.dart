@@ -14,13 +14,14 @@ class UNICappAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<UNICappAppBar> createState() => _UNICappAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight / 1.4);
 }
 
 class _UNICappAppBarState extends State<UNICappAppBar> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: widget.title,
@@ -39,7 +40,8 @@ class _UNICappAppBarState extends State<UNICappAppBar> {
 class MinimalistAppBar extends StatefulWidget implements PreferredSizeWidget {
   const MinimalistAppBar({
     super.key,
-    this.leading, required this.title,
+    this.leading,
+    required this.title,
   });
 
   final Widget? leading;

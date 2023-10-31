@@ -28,10 +28,13 @@ class AccountAPI extends AccontsUserAPI {
       code: 500,
     );
     try {
+
+      String code = encodeCode(user.password);
+
       // Create Body by Request
       final String bodyRequestSignIn = jsonEncode({
         "user_name": user.userName,
-        "password": user.password,
+        "password": code,
       });
 
       // Make the Request
@@ -57,7 +60,7 @@ class AccountAPI extends AccontsUserAPI {
 
           responseProccess.success = signInResponse.success;
 
-          yonestoAPI.storage.saveCode(decodeCode(user.password));
+          yonestoAPI.storage.saveCode(user.password);
         }
         responseProccess.code = response.statusCode;
       }
@@ -78,6 +81,19 @@ class AccountAPI extends AccontsUserAPI {
     String code = code_0 + code_1 + code_2 + code_3 + code_4;
 
     return code;
+  }
+
+  String encodeCode(String code) {
+  List<String> claves = [];
+  for (int i = 0; i < code.length; i++) {
+    String valor = code[i];
+    MapEntry<String, String> clave = AccountAPI.hash.entries.firstWhere((entry) => entry.value == valor, orElse: () => MapEntry('', ''));
+    if (clave.key.isNotEmpty) {
+      claves.add(clave.key);
+    }
+  }
+
+  return claves.join('');
   }
 
   static const Map<String, String> hash = {

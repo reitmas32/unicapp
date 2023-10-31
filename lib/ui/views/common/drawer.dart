@@ -7,6 +7,8 @@ import 'package:unicapp/ui/molecules/package.dart';
 import 'package:unicapp/ui/widgets/info/request.dart';
 import 'package:unicapp/ui/widgets/input/minimalist_text_filed.dart';
 
+import 'dart:io' show Platform;
+
 class YonestoDrawer extends StatelessWidget {
   const YonestoDrawer({
     super.key,
@@ -96,6 +98,8 @@ class _PayDebtsState extends State<PayDebts> {
 
   double totalRemainingAmount = 0;
 
+  late int code;
+
   @override
   initState() {
     super.initState();
@@ -104,7 +108,7 @@ class _PayDebtsState extends State<PayDebts> {
 
   loadUnpaidBuys() async {
     initProccessGetUnpaidsBuys = true;
-    var code = int.parse((await yonestoAPI.storage.loadCode()).data);
+    code = int.parse((await yonestoAPI.storage.loadCode()).data);
 
     var response = await yonestoAPI.getDebts(
       code,
@@ -129,7 +133,7 @@ class _PayDebtsState extends State<PayDebts> {
     // ignore: use_build_context_synchronously
     setState(() {});
 
-    var code = int.parse((await yonestoAPI.storage.loadCode()).data);
+    code = int.parse((await yonestoAPI.storage.loadCode()).data);
 
     var responseSuccess =
         await yonestoAPI.payDebts(code, double.parse(payment));
@@ -139,8 +143,14 @@ class _PayDebtsState extends State<PayDebts> {
 
     detachProcessPay = true;
     // Cerrar el AlertDialog después de 2 segundos
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () async {
       Navigator.of(context).pop();
+      if (Platform.isWindows) {
+        await StorageConection.cleanJWT();
+        await StorageConection.cleanCode();
+        // ignore: use_build_context_synchronously
+        context.go('/');
+      }
       //context.go('/home');
     });
   }
@@ -169,6 +179,10 @@ class _PayDebtsState extends State<PayDebts> {
                 MinimalistTextField(
                   lable: 'Cuanto Pagaras',
                   onlyNumbers: true,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 15,
+                  ),
                   onChanged: (text) {
                     setState(() {
                       if (text == '') {
@@ -182,6 +196,9 @@ class _PayDebtsState extends State<PayDebts> {
                 ),
                 Text(
                   'Tu deuda es: ${totalRemainingAmount - double.parse(payment)}',
+                ),
+                Text(
+                  'Tu Codigo es: $code',
                 ),
               ],
             ),

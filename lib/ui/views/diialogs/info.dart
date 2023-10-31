@@ -15,6 +15,7 @@ class InfoProductAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Colors.transparent,
       content: ShoppingCard(
         product: product,
         index: index,
