@@ -33,6 +33,9 @@ with open(env_file, "w") as file:
         file.write(f"{var_name}={var_value}\n")
         print(f"{var_name}={var_value}\n")
 
+with open(env_file, "r") as file:
+    print(file.read())
+
 PORT = 5000
 
 Handler = http.server.SimpleHTTPRequestHandler
