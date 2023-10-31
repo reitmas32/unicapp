@@ -1,6 +1,9 @@
 import os
 import http.server
 import socketserver
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 # Define el nombre del archivo .env
 env_file = "./assets/.env"
@@ -31,10 +34,9 @@ with open(env_file, "w") as file:
     for var_name in env_variables:
         var_value = os.environ.get(var_name, "")
         file.write(f"{var_name}={var_value}\n")
-        print(f"{var_name}={var_value}\n")
 
 with open(env_file, "r") as file:
-    print(file.read())
+    logging.info(file.read())
 
 PORT = 5000
 
